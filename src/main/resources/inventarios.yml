@@ -1,0 +1,35 @@
+inventories:
+  FACIL:
+    items:
+      - material: DIAMOND_SWORD
+        amount: 1
+        display-name: "&aEspada Poderosa"
+        lore:
+          - "&7Una espada para principiantes."
+      # Agrega más ítems según sea necesario para el inventario FACIL
+
+  MEDIO:
+    items:
+      - material: IRON_CHESTPLATE
+        amount: 1
+        display-name: "&bArmadura Fuerte"
+        lore:
+          - "&7Protección intermedia."
+      # Agrega más ítems según sea necesario para el inventario MEDIO
+
+  DIFICIL:
+    items:
+      - material: BOW
+        amount: 1
+        display-name: "&cArco Poderoso"
+        lore:
+          - "&7Perfecto para combates a larga distancia."
+      # Agrega más ítems según sea necesario para el inventario DIFICIL
+
+  PERSONALIZADO:
+    items:
+      - material: GOLDEN_APPLE
+        amount: 1
+        display-name: "&6Manzana Dorada"
+        lore:
+          - "&7Recupera vida y proporciona resistencia."
