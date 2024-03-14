@@ -18,15 +18,16 @@ public class PreGameListener implements Listener {
     @EventHandler
     public void onPlayerMove(PlayerMoveEvent event){
         Player player = event.getPlayer();
-
-        if((gameManager.getGameState()== GameState.ESPERANDO || gameManager.getGameState()==GameState.COMENZANDO) &&!player.isOp()) {  //TODO QUITAR EL OP Y AGREGAR POR PERMISO
-            event.setCancelled(true);
-            player.sendMessage("Aun no te puedes mover"); //TODO REMOVER
-        }
+       // if(!player.hasPermission("hexa.admin")) {
+            if ((gameManager.getGameState() == GameState.ESPERANDO || gameManager.getGameState() == GameState.COMENZANDO) && !player.isOp()) {  //TODO QUITAR EL OP Y AGREGAR POR PERMISO
+                event.setCancelled(true);
+                player.sendMessage("Aun no te puedes mover"); //TODO REMOVER
+            }
+        // }
     }
     @EventHandler
     public void onBlockBreak(BlockBreakEvent event){
-        if(gameManager.getGameState()== GameState.ESPERANDO || gameManager.getGameState()==GameState.COMENZANDO) {
+        if(gameManager.getGameState()== GameState.ESPERANDO || gameManager.getGameState()==GameState.COMENZANDO) { //TODO Crear BlockManager para romper ciertos bloques
             event.setCancelled(true);
         }
     }
