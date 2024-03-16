@@ -1,4 +1,4 @@
-inventarios:
+inventories:
   FACIL:
     items:
       - material: DIAMOND_SWORD

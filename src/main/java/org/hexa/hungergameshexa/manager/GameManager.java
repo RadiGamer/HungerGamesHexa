@@ -8,7 +8,7 @@ import org.hexa.hungergameshexa.tasks.WorldBorder1;
 
 public class GameManager {
 
-    private GameState gameState;
+    private GameState gameState = GameState.ESPERANDO;
     private final HungerGamesHexa plugin;
     private StartCountdown startCountdown;
     private WorldBorder1 worldBorder1;
@@ -33,7 +33,7 @@ public class GameManager {
                 break;
             case ACTIVO:
                 this.worldBorder1 = new WorldBorder1(this,990,10); //TODO DEFINIR VALORES
-                this.worldBorder1.runTaskTimer(plugin, 0, 20);
+                this.worldBorder1.runTaskTimer(plugin, 0, 20); //TODO METER DELAY
                 Bukkit.broadcastMessage(ChatColor.RED+"El borde se esta cerrando...");
                 break;
         }

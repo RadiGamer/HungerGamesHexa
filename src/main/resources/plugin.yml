@@ -6,9 +6,9 @@ commands:
   start:
     usage: /<command>
     description: Cambia el gamestate
-  openinv:
-    usage: /<command>
-    description: Abre el sistema de cofres
   setspawn:
     usage: /<command>
     description: Coloca las ubicaciones
+  lootconfig:
+    usage: /<command>
+    description: Configura los cofres

@@ -1,100 +1,84 @@
 package org.hexa.hungergameshexa.manager;
+
 import org.bukkit.Bukkit;
+import org.bukkit.Location;
+import org.bukkit.block.Chest;
+import org.bukkit.block.DoubleChest;
 import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.configuration.file.FileConfiguration;
-import org.bukkit.configuration.file.YamlConfiguration;
-import org.bukkit.entity.Item;
+import org.bukkit.event.EventHandler;
+import org.bukkit.event.Listener;
+import org.bukkit.event.inventory.InventoryOpenEvent;
 import org.bukkit.inventory.Inventory;
+import org.bukkit.inventory.InventoryHolder;
 import org.bukkit.inventory.ItemStack;
-import org.bukkit.plugin.Plugin;
-import org.hexa.hungergameshexa.HungerGamesHexa;
+import org.hexa.hungergameshexa.LootItem;
 
-import java.io.File;
-import java.io.IOException;
-import java.util.HashMap;
+import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
-import java.util.Map;
+import java.util.Set;
+import java.util.concurrent.ThreadLocalRandom;
 
-public class ChestManager {
-    private final Map<String, Inventory> inventories = new HashMap<>();
-    private final File configFile;
-    private final FileConfiguration config;
+public class ChestManager implements Listener {
+    public final Set<Location> openedChests = new HashSet<>();
+    public final List<LootItem> lootItems = new ArrayList<>();
 
-    public ChestManager(HungerGamesHexa plugin) {
-        this.configFile = new File(plugin.getDataFolder(), "inventarios.yml");
-        this.config = YamlConfiguration.loadConfiguration(configFile);
-        loadInventories();
-        initializeConfig();
-    }
-    private void initializeConfig() {
-        if (!configFile.exists()) {
-            config.createSection("inventories");
-            saveConfig();
-        }
-    }
-    public void saveConfig() {
-        try {
-            config.save(configFile);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
+    public ChestManager(FileConfiguration lootConfig){
+        ConfigurationSection itemSection = lootConfig.getConfigurationSection("lootItems");
 
-    public void saveInventory(String inventoryName, Inventory inventory) {
-        config.set("inventories." + inventoryName + ".items" , inventory.getContents());
-        saveConfig();
-
-        try {
-            config.save(configFile);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-
-    private void loadInventories() {
-        if (!configFile.exists()) {
-            // Create the default inventories in the YAML file if it doesn't exist
-            config.set("inventories.FACIL", null);
-            config.set("inventories.MEDIO", null);
-            config.set("inventories.DIFICIL", null);
-            config.set("inventories.PERSONALIZADO", null);
-
-            try {
-                config.save(configFile);
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
+        if(itemSection==null){
+            Bukkit.getLogger().severe("Falta lootItems en config.yml :))");
         }
 
-        if (config.contains("inventories")) {
-            ConfigurationSection inventoriesSection = config.getConfigurationSection("inventories");
+        for(String key : itemSection.getKeys(false)){
+            ConfigurationSection section = itemSection.getConfigurationSection(key);
+            lootItems.add(new LootItem(section));
+        }
+    }
+    @EventHandler
+    public void onChestOpen(InventoryOpenEvent event){
+        InventoryHolder holder = event.getInventory().getHolder();
+        if(holder instanceof Chest){
+            Chest chest = (Chest) holder;
+            if(hasBeenOpened(chest.getLocation())) return;
 
-            if (inventoriesSection != null) {
-                Map<String, Object> inventoryData = inventoriesSection.getValues(false);
+            markAsOpened(chest.getLocation());
+            fill(chest.getBlockInventory());
+        } else if (holder instanceof DoubleChest){
+            DoubleChest chest = (DoubleChest) holder;
+            if(hasBeenOpened(chest.getLocation())) return;
 
-                for (Map.Entry<String, Object> entry : inventoryData.entrySet()) {
-                    String inventoryName = entry.getKey();
-                    Object inventoryContents = entry.getValue();
+            markAsOpened(chest.getLocation());
+            fill(chest.getInventory());
+        }
+    }
+    public void fill(Inventory inventory){
+        inventory.clear();
+        ThreadLocalRandom random = ThreadLocalRandom.current();
+        Set<LootItem> used = new HashSet<>();
 
-                    if (inventoryContents instanceof List<?>) {
-                        Inventory inventory = Bukkit.createInventory(null, 9 * 3, inventoryName);
-                        inventory.setContents(((List<ItemStack>) inventoryContents).toArray(new ItemStack[0]));
-                        inventories.put(inventoryName, inventory);
-                    }
-                }
+        for(int slotIndex = 0; slotIndex<inventory.getSize(); slotIndex++){
+            LootItem randomItem = lootItems.get(random.nextInt(lootItems.size()));
+            if(used.contains(randomItem)) continue;
+            used.add(randomItem);
+
+            if(randomItem.shouldFill(random)){
+                ItemStack itemStack = randomItem.make(random);
+                inventory.setItem(slotIndex, itemStack);
             }
         }
     }
-    public Inventory loadInventory(String inventoryName){
-        ConfigurationSection inventorySection = config.getConfigurationSection("inventories." + inventoryName);
-        if(inventorySection !=null){
-            List<ItemStack> items = (List<ItemStack>) inventorySection.getList("items");
-            if(items!=null) {
-                Inventory inventory = Bukkit.createInventory(null, 9 * 3, inventoryName);
-                inventory.setContents(inventorySection.getList("items").toArray(new ItemStack[0]));
-                return inventory;
-            }
-        }
-        return null;
+
+    public void markAsOpened(Location location){
+        openedChests.add(location);
     }
+    public boolean hasBeenOpened(Location location){
+        return openedChests.contains(location);
+    }
+    public void resetChests(){
+        openedChests.clear();
+    }
+
+
 }

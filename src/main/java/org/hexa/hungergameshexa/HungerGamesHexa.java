@@ -1,10 +1,10 @@
 package org.hexa.hungergameshexa;
 
 import org.bukkit.plugin.java.JavaPlugin;
-import org.hexa.hungergameshexa.commands.OpenGUICommand;
+import org.hexa.hungergameshexa.commands.LootConfigCommand;
 import org.hexa.hungergameshexa.commands.SetSpawnCommand;
 import org.hexa.hungergameshexa.commands.StartCommand;
-import org.hexa.hungergameshexa.listeners.InvListener;
+import org.hexa.hungergameshexa.listeners.LootConfigListener;
 import org.hexa.hungergameshexa.listeners.PlayerQuitListener;
 import org.hexa.hungergameshexa.listeners.PreGameListener;
 import org.hexa.hungergameshexa.manager.ChestManager;
@@ -13,26 +13,28 @@ import org.hexa.hungergameshexa.manager.SpawnPointManager;
 
 public final class HungerGamesHexa extends JavaPlugin {
     private GameManager gameManager;
-    private ChestManager chestManager;
     private SpawnPointManager spawnPointManager;
+    private ChestManager chestManager;
 
 //TODO NO OLVIDAR METER MULTIVERSE
 
     @Override
     public void onEnable() {
+        saveDefaultConfig();
 
-        saveConfig();
+
         //MANAGERS
+        this.chestManager = new ChestManager(getConfig());
         this.gameManager = new GameManager(this);
-        this.chestManager = new ChestManager(this);
         this.spawnPointManager = new SpawnPointManager(this);
         //LISTENERS
-        getServer().getPluginManager().registerEvents(new InvListener(this,chestManager), this);
         getServer().getPluginManager().registerEvents(new PreGameListener(gameManager),this);
         getServer().getPluginManager().registerEvents(new PlayerQuitListener(spawnPointManager), this);
         getServer().getPluginManager().registerEvents(new PlayerQuitListener(spawnPointManager), this);
+        getServer().getPluginManager().registerEvents(new LootConfigListener(this), this);
+        getServer().getPluginManager().registerEvents(chestManager, this);
         //COMANDOS
-        getCommand("openinv").setExecutor(new OpenGUICommand(this));
+        getCommand("lootconfig").setExecutor(new LootConfigCommand(this));
         getCommand("start").setExecutor(new StartCommand(gameManager));
         getCommand("setspawn").setExecutor(new SetSpawnCommand(spawnPointManager));
 

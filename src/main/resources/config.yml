@@ -1,0 +1,14 @@
+lootItems:
+  0:
+    material: IRON_SWORD
+    name: "&cFire Sword"
+    enchantments:
+      FIRE_ASPECT: 1
+    chance: 0.1
+    minAmount: 1
+    maxAmount: 1
+  1:
+    material: APPLE
+    chance: 0.6
+    minAmount: 2
+    maxAmount: 7
