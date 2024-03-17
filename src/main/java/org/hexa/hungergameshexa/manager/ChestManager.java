@@ -12,7 +12,7 @@ import org.bukkit.event.inventory.InventoryOpenEvent;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.InventoryHolder;
 import org.bukkit.inventory.ItemStack;
-import org.hexa.hungergameshexa.LootItem;
+import org.hexa.hungergameshexa.tasks.LootItem;
 
 import java.util.ArrayList;
 import java.util.HashSet;

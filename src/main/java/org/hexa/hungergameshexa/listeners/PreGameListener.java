@@ -1,5 +1,6 @@
 package org.hexa.hungergameshexa.listeners;
 
+import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -21,14 +22,14 @@ public class PreGameListener implements Listener {
        // if(!player.hasPermission("hexa.admin")) {
             if ((gameManager.getGameState() == GameState.ESPERANDO || gameManager.getGameState() == GameState.COMENZANDO) && !player.isOp()) {  //TODO QUITAR EL OP Y AGREGAR POR PERMISO
                 event.setCancelled(true);
-                player.sendMessage("Aun no te puedes mover"); //TODO REMOVER
+                player.sendMessage(ChatColor.GRAY+"Aun no te puedes mover"); //TODO REMOVER
             }
         // }
     }
     @EventHandler
     public void onBlockBreak(BlockBreakEvent event){
-        if(gameManager.getGameState()== GameState.ESPERANDO || gameManager.getGameState()==GameState.COMENZANDO) { //TODO Crear BlockManager para romper ciertos bloques
+         //TODO Crear CONDICIONAL AQUI con BlockManager para romper ciertos bloques o PONERLO ALL-TIME
             event.setCancelled(true);
-        }
+
     }
 }

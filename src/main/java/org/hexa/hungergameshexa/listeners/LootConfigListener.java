@@ -4,7 +4,6 @@ import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.configuration.file.FileConfiguration;
-import org.bukkit.enchantments.Enchantment;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.inventory.InventoryCloseEvent;
@@ -26,7 +25,7 @@ public class LootConfigListener implements Listener {
 
         ItemStack[] items = event.getInventory().getContents();
         FileConfiguration config = plugin.getConfig();
-        config.set("lootItems", null); // Clear the existing configuration section
+        config.set("lootItems", null);
 
         for (int i = 0; i < items.length; i++) {
             ItemStack item = items[i];

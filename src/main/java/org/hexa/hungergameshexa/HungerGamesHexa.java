@@ -2,6 +2,7 @@ package org.hexa.hungergameshexa;
 
 import org.bukkit.plugin.java.JavaPlugin;
 import org.hexa.hungergameshexa.commands.LootConfigCommand;
+import org.hexa.hungergameshexa.commands.ResetCommand;
 import org.hexa.hungergameshexa.commands.SetSpawnCommand;
 import org.hexa.hungergameshexa.commands.StartCommand;
 import org.hexa.hungergameshexa.listeners.LootConfigListener;
@@ -37,6 +38,7 @@ public final class HungerGamesHexa extends JavaPlugin {
         getCommand("lootconfig").setExecutor(new LootConfigCommand(this));
         getCommand("start").setExecutor(new StartCommand(gameManager));
         getCommand("setspawn").setExecutor(new SetSpawnCommand(spawnPointManager));
+        getCommand("reset").setExecutor(new ResetCommand(chestManager));
 
     }
 

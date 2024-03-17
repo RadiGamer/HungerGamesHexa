@@ -39,6 +39,7 @@ public class SetSpawnCommand implements CommandExecutor {
 
         spawnPointManager.setSpawnPoint(player.getLocation(), spawnPointIndex);
         player.sendMessage("Spawn point " + spawnPointIndex + " colocado");
+        spawnPointManager.saveSpawnPoint(spawnPointIndex, player.getLocation());
         return true;
     }
 }

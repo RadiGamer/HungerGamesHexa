@@ -12,3 +12,6 @@ commands:
   lootconfig:
     usage: /<command>
     description: Configura los cofres
+  reset:
+    usage: /<command>
+    description: Reinicia los cofres

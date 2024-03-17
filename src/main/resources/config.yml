@@ -1,14 +1,271 @@
 lootItems:
-  0:
-    material: IRON_SWORD
-    name: "&cFire Sword"
-    enchantments:
-      FIRE_ASPECT: 1
-    chance: 0.1
+  '0':
+    material: STRIPPED_OAK_LOG
     minAmount: 1
     maxAmount: 1
-  1:
-    material: APPLE
-    chance: 0.6
-    minAmount: 2
-    maxAmount: 7
+    chance: 0.1
+  '1':
+    material: OAK_SLAB
+    minAmount: 1
+    maxAmount: 1
+    chance: 0.1
+  '2':
+    material: OAK_FENCE
+    minAmount: 1
+    maxAmount: 1
+    chance: 0.1
+  '3':
+    material: OAK_FENCE_GATE
+    minAmount: 1
+    maxAmount: 1
+    chance: 0.1
+  '4':
+    material: OAK_LOG
+    minAmount: 1
+    maxAmount: 1
+    chance: 0.1
+  '5':
+    material: OAK_WOOD
+    minAmount: 1
+    maxAmount: 1
+    chance: 0.1
+  '6':
+    material: STRIPPED_OAK_WOOD
+    minAmount: 1
+    maxAmount: 1
+    chance: 0.1
+  '7':
+    material: OAK_PLANKS
+    minAmount: 1
+    maxAmount: 1
+    chance: 0.1
+  '8':
+    material: OAK_STAIRS
+    minAmount: 1
+    maxAmount: 1
+    chance: 0.1
+  '9':
+    material: LIGHT_GRAY_CARPET
+    minAmount: 1
+    maxAmount: 1
+    chance: 0.1
+  '10':
+    material: PINK_WOOL
+    minAmount: 1
+    maxAmount: 1
+    chance: 0.1
+  '11':
+    material: MAGENTA_WOOL
+    minAmount: 1
+    maxAmount: 1
+    chance: 0.1
+  '12':
+    material: PURPLE_WOOL
+    minAmount: 1
+    maxAmount: 1
+    chance: 0.1
+  '13':
+    material: CYAN_WOOL
+    minAmount: 1
+    maxAmount: 1
+    chance: 0.1
+  '14':
+    material: LIGHT_GRAY_WOOL
+    minAmount: 1
+    maxAmount: 1
+    chance: 0.1
+  '15':
+    material: BLUE_WOOL
+    minAmount: 1
+    maxAmount: 1
+    chance: 0.1
+  '16':
+    material: RED_WOOL
+    minAmount: 1
+    maxAmount: 1
+    chance: 0.1
+  '17':
+    material: LIGHT_GRAY_TERRACOTTA
+    minAmount: 1
+    maxAmount: 1
+    chance: 0.1
+  '18':
+    material: LIME_WOOL
+    minAmount: 1
+    maxAmount: 1
+    chance: 0.1
+  '19':
+    material: YELLOW_WOOL
+    minAmount: 1
+    maxAmount: 1
+    chance: 0.1
+  '20':
+    material: BROWN_WOOL
+    minAmount: 1
+    maxAmount: 1
+    chance: 0.1
+  '21':
+    material: BLACK_WOOL
+    minAmount: 1
+    maxAmount: 1
+    chance: 0.1
+  '22':
+    material: WHITE_WOOL
+    minAmount: 1
+    maxAmount: 1
+    chance: 0.1
+  '23':
+    material: GRAY_CARPET
+    minAmount: 1
+    maxAmount: 1
+    chance: 0.1
+  '24':
+    material: WHITE_CARPET
+    minAmount: 1
+    maxAmount: 1
+    chance: 0.1
+  '25':
+    material: GRAY_WOOL
+    minAmount: 1
+    maxAmount: 1
+    chance: 0.1
+  '26':
+    material: ORANGE_WOOL
+    minAmount: 1
+    maxAmount: 1
+    chance: 0.1
+  '27':
+    material: BLACK_BED
+    minAmount: 1
+    maxAmount: 1
+    chance: 0.1
+  '28':
+    material: CYAN_BED
+    minAmount: 1
+    maxAmount: 1
+    chance: 0.1
+  '29':
+    material: WHITE_BED
+    minAmount: 1
+    maxAmount: 1
+    chance: 0.1
+  '30':
+    material: YELLOW_BED
+    minAmount: 1
+    maxAmount: 1
+    chance: 0.1
+  '31':
+    material: BROWN_SHULKER_BOX
+    minAmount: 1
+    maxAmount: 1
+    chance: 0.1
+  '32':
+    material: RED_SHULKER_BOX
+    minAmount: 1
+    maxAmount: 1
+    chance: 0.1
+  '33':
+    material: LIGHT_GRAY_BED
+    minAmount: 1
+    maxAmount: 1
+    chance: 0.1
+  '34':
+    material: RED_BED
+    minAmount: 1
+    maxAmount: 1
+    chance: 0.1
+  '35':
+    material: LIME_SHULKER_BOX
+    minAmount: 1
+    maxAmount: 1
+    chance: 0.1
+  '36':
+    material: GREEN_SHULKER_BOX
+    minAmount: 1
+    maxAmount: 1
+    chance: 0.1
+  '37':
+    material: YELLOW_SHULKER_BOX
+    minAmount: 1
+    maxAmount: 1
+    chance: 0.1
+  '38':
+    material: MAGENTA_SHULKER_BOX
+    minAmount: 1
+    maxAmount: 1
+    chance: 0.1
+  '39':
+    material: GRAY_SHULKER_BOX
+    minAmount: 1
+    maxAmount: 1
+    chance: 0.1
+  '40':
+    material: PINK_SHULKER_BOX
+    minAmount: 1
+    maxAmount: 1
+    chance: 0.1
+  '41':
+    material: CYAN_SHULKER_BOX
+    minAmount: 1
+    maxAmount: 1
+    chance: 0.1
+  '42':
+    material: GRAY_BED
+    minAmount: 1
+    maxAmount: 1
+    chance: 0.1
+  '43':
+    material: ORANGE_SHULKER_BOX
+    minAmount: 1
+    maxAmount: 1
+    chance: 0.1
+  '44':
+    material: BLACK_SHULKER_BOX
+    minAmount: 1
+    maxAmount: 1
+    chance: 0.1
+  '45':
+    material: DIAMOND
+    minAmount: 1
+    maxAmount: 1
+    chance: 0.1
+  '46':
+    material: CHARCOAL
+    minAmount: 1
+    maxAmount: 1
+    chance: 0.1
+  '47':
+    material: SNOWBALL
+    minAmount: 1
+    maxAmount: 1
+    chance: 0.1
+  '48':
+    material: SLIME_BALL
+    minAmount: 1
+    maxAmount: 1
+    chance: 0.1
+  '49':
+    material: RAW_GOLD
+    minAmount: 1
+    maxAmount: 1
+    chance: 0.1
+  '50':
+    material: RAW_COPPER
+    minAmount: 1
+    maxAmount: 1
+    chance: 0.1
+  '51':
+    material: FIRE_CHARGE
+    minAmount: 1
+    maxAmount: 1
+    chance: 0.1
+  '52':
+    material: HEART_OF_THE_SEA
+    minAmount: 1
+    maxAmount: 1
+    chance: 0.1
+  '53':
+    material: COAL
+    minAmount: 1
+    maxAmount: 1
+    chance: 0.1
