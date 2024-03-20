@@ -29,7 +29,7 @@ public class LootConfigCommand implements CommandExecutor {
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
 
         Player player = (Player) sender;
-        Inventory inv = Bukkit.createInventory(null, 9*6, ChatColor.BLUE + "Coloca los items para los cofres");
+        Inventory inv = Bukkit.createInventory(null, 9*8, ChatColor.BLUE + "Coloca los items para los cofres");
 
         plugin.reloadConfig();
 
@@ -54,6 +54,10 @@ public class LootConfigCommand implements CommandExecutor {
                                     meta.addEnchant(enchantment, enchSection.getInt(enchKey), true);
                                 }
                             }
+                        }
+                        if(itemSection.contains("customModelData")){
+                            int customModelData = itemSection.getInt("customModelData");
+                            meta.setCustomModelData(customModelData);
                         }
                         item.setItemMeta(meta);
                     }

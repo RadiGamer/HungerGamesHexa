@@ -44,6 +44,10 @@ public class LootConfigListener implements Listener {
                         config.set(enchantPath, level);
                     });
                 }
+                if(item.getItemMeta().hasCustomModelData()){
+                    int customModelData = item.getItemMeta().getCustomModelData();
+                    config.set(basePath + ".customModelData", customModelData);
+                }
             }
             config.set(basePath + ".minAmount", 1);
             config.set(basePath + ".maxAmount", 1);

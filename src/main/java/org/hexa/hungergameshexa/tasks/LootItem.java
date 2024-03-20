@@ -18,9 +18,9 @@ public class LootItem {
     private final String name;
     private final Map<Enchantment, Integer> enchantmentToLevelMap = new HashMap<>();
     private final double chance;
-
     private final int minAmount;
     private final int maxAmount;
+    private final Integer customModelData;
 
 
     public LootItem(ConfigurationSection section){
@@ -47,6 +47,11 @@ public class LootItem {
         this.chance = section.getDouble("chance");
         this.minAmount = section.getInt("minAmount");
         this.maxAmount = section.getInt("maxAmount");
+        if (section.contains("customModelData")) {
+            this.customModelData = section.getInt("customModelData");
+        } else {
+            this.customModelData = null;
+        }
     }
     public boolean shouldFill(Random random){
         return random.nextDouble() < chance;
@@ -63,6 +68,9 @@ public class LootItem {
                 itemMeta.addEnchant(enchantEntry.getKey(), enchantEntry.getValue(), true);
             }
         }
+        if (customModelData != null) {
+            itemMeta.setCustomModelData(customModelData);
+        }
         itemStack.setItemMeta(itemMeta);
         return itemStack;
     }
@@ -70,3 +78,4 @@ public class LootItem {
 
 }
 
+//TODO TESTEAR CUSTOM MODEL DATA
