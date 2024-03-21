@@ -1,5 +1,6 @@
 package org.hexa.hungergameshexa.commands;
 
+import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -16,6 +17,16 @@ public class SetSpawnCommand implements CommandExecutor {
 
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
+
+        if (!(sender instanceof Player)) {
+            sender.sendMessage(ChatColor.RED + "No puedes usar este comando en la consola crack");
+            return true;
+        }
+
+        if (!sender.hasPermission("hexa.admin")) {
+            sender.sendMessage(ChatColor.RED + "No tienes permiso para ejecutar este comando.");
+            return true;
+        }
 
         Player player = (Player) sender;
 

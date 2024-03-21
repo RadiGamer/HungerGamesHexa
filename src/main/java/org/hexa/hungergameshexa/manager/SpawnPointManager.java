@@ -22,39 +22,11 @@ public class SpawnPointManager {
         loadSpawnPoints();
     }
 
-    public boolean isFull() {
-        return playerSpawnPointMap.size() >= maxPlayers;
-    }
-
-    public void handlePlayerJoin(Player player) {
-        if (isFull()) {
-            player.kickPlayer("Servidor lleno.");
-            return;
-        }
-
-        int spawnPointIndex = findAvailableSpawnPoint();
-        if (spawnPointIndex != -1) {
-            player.teleport(spawnPoints.get(spawnPointIndex));
-            playerSpawnPointMap.put(player.getUniqueId(), spawnPointIndex);
-        }
-    }
-
-    public void handlePlayerQuit(Player player) {
-        playerSpawnPointMap.remove(player.getUniqueId());
-    }
 
     public void setSpawnPoint(Location location, int spawnPointIndex) {
         spawnPoints.put(spawnPointIndex, location);
     }
 
-    private int findAvailableSpawnPoint() {
-        for (int i = 1; i <= 16; i++) {
-            if (!playerSpawnPointMap.containsValue(i) && spawnPoints.containsKey(i)) {
-                return i;
-            }
-        }
-        return -1;
-    }
     public void loadSpawnPoints() {
         FileConfiguration config = plugin.getConfig();
         for (int i = 1; i <= maxPlayers; i++) {

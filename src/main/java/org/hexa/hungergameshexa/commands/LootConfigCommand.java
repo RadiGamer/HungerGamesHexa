@@ -28,8 +28,18 @@ public class LootConfigCommand implements CommandExecutor {
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
 
+        if (!(sender instanceof Player)) {
+            sender.sendMessage(ChatColor.RED + "No puedes usar este comando en la consola crack");
+            return true;
+        }
+
+        if (!sender.hasPermission("hexa.admin")) {
+            sender.sendMessage(ChatColor.RED + "No tienes permiso para ejecutar este comando.");
+            return true;
+        }
+
         Player player = (Player) sender;
-        Inventory inv = Bukkit.createInventory(null, 9*8, ChatColor.BLUE + "Coloca los items para los cofres");
+        Inventory inv = Bukkit.createInventory(null, 9 * 6, ChatColor.BLUE + "Coloca los items para los cofres");
 
         plugin.reloadConfig();
 

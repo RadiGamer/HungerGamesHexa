@@ -6,7 +6,6 @@ import org.hexa.hungergameshexa.commands.ResetCommand;
 import org.hexa.hungergameshexa.commands.SetSpawnCommand;
 import org.hexa.hungergameshexa.commands.StartCommand;
 import org.hexa.hungergameshexa.listeners.LootConfigListener;
-import org.hexa.hungergameshexa.listeners.PlayerQuitListener;
 import org.hexa.hungergameshexa.listeners.PreGameListener;
 import org.hexa.hungergameshexa.manager.ChestManager;
 import org.hexa.hungergameshexa.manager.GameManager;
@@ -30,8 +29,6 @@ public final class HungerGamesHexa extends JavaPlugin {
         this.spawnPointManager = new SpawnPointManager(this);
         //LISTENERS
         getServer().getPluginManager().registerEvents(new PreGameListener(gameManager),this);
-        getServer().getPluginManager().registerEvents(new PlayerQuitListener(spawnPointManager), this);
-        getServer().getPluginManager().registerEvents(new PlayerQuitListener(spawnPointManager), this);
         getServer().getPluginManager().registerEvents(new LootConfigListener(this), this);
         getServer().getPluginManager().registerEvents(chestManager, this);
         //COMANDOS
