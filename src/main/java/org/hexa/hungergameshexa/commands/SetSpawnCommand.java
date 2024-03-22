@@ -54,3 +54,4 @@ public class SetSpawnCommand implements CommandExecutor {
         return true;
     }
 }
+//TODO Dar formato al comando
