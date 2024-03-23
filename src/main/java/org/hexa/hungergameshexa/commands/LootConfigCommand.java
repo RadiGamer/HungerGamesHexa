@@ -14,13 +14,14 @@ import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.hexa.hungergameshexa.HungerGamesHexa;
+import org.hexa.hungergameshexa.util.ChatUtil;
 
 import java.util.Objects;
 
 public class LootConfigCommand implements CommandExecutor {
-
     private final HungerGamesHexa plugin;
-
+    String errorConsola = "&c&lNo puedes usar este comando en la consola crack";
+    String errorPermiso = "&c&lNo tienes permiso para ejecutar este comando";
     public LootConfigCommand(HungerGamesHexa plugin) {
         this.plugin = plugin;
     }
@@ -29,12 +30,12 @@ public class LootConfigCommand implements CommandExecutor {
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
 
         if (!(sender instanceof Player)) {
-            sender.sendMessage(ChatColor.RED + "No puedes usar este comando en la consola crack");
+            sender.sendMessage(ChatUtil.format(errorConsola));
             return true;
         }
 
         if (!sender.hasPermission("hexa.admin")) {
-            sender.sendMessage(ChatColor.RED + "No tienes permiso para ejecutar este comando.");
+            sender.sendMessage(ChatUtil.format(errorPermiso));
             return true;
         }
 

@@ -8,6 +8,7 @@ import org.bukkit.scheduler.BukkitRunnable;
 import org.hexa.hungergameshexa.commands.StartCommand;
 import org.hexa.hungergameshexa.manager.GameManager;
 import org.hexa.hungergameshexa.manager.GameState;
+import org.hexa.hungergameshexa.util.ChatUtil;
 
 public class StartCountdown extends BukkitRunnable {
 
@@ -26,7 +27,7 @@ public class StartCountdown extends BukkitRunnable {
             gameManager.setGameState(GameState.ACTIVO);
             return;
         }
-        Bukkit.broadcastMessage(ChatColor.GRAY+"Empieza en "+ChatColor.GREEN +timeLeft);
+        Bukkit.broadcastMessage(ChatUtil.format("&7Empieza en &a"+timeLeft));
 
     }
 }

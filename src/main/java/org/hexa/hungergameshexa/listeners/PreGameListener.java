@@ -35,8 +35,8 @@ public class PreGameListener implements Listener {
                 long currentTime = System.currentTimeMillis();
                 long lastMessageTime = messageCooldowns.getOrDefault(player.getUniqueId(), 0L);
                 if (currentTime - lastMessageTime > MESSAGE_COOLDOWN_MS) {
-                    player.sendMessage(ChatColor.RED + "Aún no te puedes mover."); //TODO AGREGAR PREFFIX
-                    player.playSound(player.getLocation(), Sound.BLOCK_NOTE_BLOCK_BASS, 10, 3);
+                    player.sendMessage(ChatColor.RED + "Aún no te puedes mover.");
+                    player.playSound(player.getLocation(), Sound.BLOCK_NOTE_BLOCK_BASS, 10, 1);
                     messageCooldowns.put(player.getUniqueId(), currentTime);
                 }
             }
@@ -51,8 +51,10 @@ public class PreGameListener implements Listener {
 
     @EventHandler
     public void onBlockBreak(BlockBreakEvent event){
-         //TODO Crear CONDICIONAL AQUI con BlockManager para romper ciertos bloques o PONERLO ALL-TIME
-            event.setCancelled(true);
+        Player player = event.getPlayer();
 
+        if(!player.hasPermission("hexa.admin")){
+            event.setCancelled(true);
+        }
     }
 }

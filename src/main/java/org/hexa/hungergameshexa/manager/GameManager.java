@@ -27,7 +27,6 @@ public class GameManager {
             case ESPERANDO:
                 break;
             case COMENZANDO:
-                Bukkit.broadcastMessage("Comenzando");
                 this.startCountdown = new StartCountdown(this);
                 this.startCountdown.runTaskTimer(plugin,0,20);
                 break;

@@ -13,6 +13,7 @@ import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
 import org.hexa.hungergameshexa.HungerGamesHexa;
 import org.hexa.hungergameshexa.manager.SpawnPointManager;
+import org.hexa.hungergameshexa.util.ChatUtil;
 
 import java.io.File;
 import java.io.IOException;
@@ -145,7 +146,7 @@ public class PlayerJoinListener implements Listener {
 
         int spawnNumber = assignSpawnpoint();
         if (spawnNumber == -1) {
-            event.getPlayer().kickPlayer("El servidor esta lleno"); //TODO Dar Formato
+            event.getPlayer().kickPlayer(ChatUtil.format("&cEl servidor esta lleno"));
             return;
         }
         playerSpawnMap.put(player.getUniqueId(), spawnNumber);

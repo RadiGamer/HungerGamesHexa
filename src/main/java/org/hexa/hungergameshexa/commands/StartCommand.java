@@ -1,12 +1,11 @@
 package org.hexa.hungergameshexa.commands;
 
-import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
-import org.bukkit.entity.Player;
 import org.hexa.hungergameshexa.manager.GameManager;
 import org.hexa.hungergameshexa.manager.GameState;
+import org.hexa.hungergameshexa.util.ChatUtil;
 import org.jetbrains.annotations.NotNull;
 
 public class StartCommand implements CommandExecutor {
@@ -18,10 +17,10 @@ public class StartCommand implements CommandExecutor {
 
     @Override
     public boolean onCommand(@NotNull CommandSender commandSender, @NotNull Command command, @NotNull String s, @NotNull String[] strings) {
-
+        String errorPermiso = "&c&lNo tienes permiso para ejecutar este comando";
 
         if (!commandSender.hasPermission("hexa.admin")) {
-            commandSender.sendMessage(ChatColor.RED + "No tienes permiso para ejecutar este comando.");
+            commandSender.sendMessage(ChatUtil.format(errorPermiso));
             return true;
         }
 
