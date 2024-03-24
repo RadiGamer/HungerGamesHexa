@@ -18,9 +18,6 @@ public class GameManager {
         this.plugin = plugin;
     }
 
-
-    //TODO remover broadcastMessage de los switch cases
-
     public void setGameState(GameState gameState) {
         this.gameState = gameState;
         switch (gameState){

@@ -43,6 +43,7 @@ public final class HungerGamesHexa extends JavaPlugin {
         getCommand("setspawn").setExecutor(new SetSpawnCommand(spawnPointManager));
         getCommand("reset").setExecutor(new ResetCommand(chestManager));
         getCommand("droploot").setExecutor(new DropLootConfigCommand(this));
+        getCommand("drop").setExecutor(new DropCommand(this));
 
     }
 
