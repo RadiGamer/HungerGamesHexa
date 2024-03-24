@@ -1,4 +1,4 @@
-package org.hexa.hungergameshexa.manager;
+package org.hexa.hungergameshexa.util;
 
 public enum GameState {
     ESPERANDO,

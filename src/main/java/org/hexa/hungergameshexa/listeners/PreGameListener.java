@@ -8,7 +8,7 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.block.BlockBreakEvent;
 import org.bukkit.event.player.PlayerMoveEvent;
 import org.hexa.hungergameshexa.manager.GameManager;
-import org.hexa.hungergameshexa.manager.GameState;
+import org.hexa.hungergameshexa.util.GameState;
 
 import java.util.HashMap;
 import java.util.Map;

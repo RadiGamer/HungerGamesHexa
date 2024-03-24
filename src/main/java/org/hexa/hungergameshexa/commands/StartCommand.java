@@ -4,7 +4,7 @@ import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.hexa.hungergameshexa.manager.GameManager;
-import org.hexa.hungergameshexa.manager.GameState;
+import org.hexa.hungergameshexa.util.GameState;
 import org.hexa.hungergameshexa.util.ChatUtil;
 import org.jetbrains.annotations.NotNull;
 

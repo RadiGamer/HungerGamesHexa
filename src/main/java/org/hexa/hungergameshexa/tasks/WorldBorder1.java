@@ -4,7 +4,7 @@ import org.bukkit.Bukkit;
 import org.bukkit.World;
 import org.bukkit.scheduler.BukkitRunnable;
 import org.hexa.hungergameshexa.manager.GameManager;
-import org.hexa.hungergameshexa.manager.GameState;
+import org.hexa.hungergameshexa.util.GameState;
 
 public class WorldBorder1 extends BukkitRunnable {
 

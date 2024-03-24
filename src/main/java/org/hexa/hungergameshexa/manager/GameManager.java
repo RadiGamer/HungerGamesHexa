@@ -5,6 +5,7 @@ import org.bukkit.ChatColor;
 import org.hexa.hungergameshexa.HungerGamesHexa;
 import org.hexa.hungergameshexa.tasks.StartCountdown;
 import org.hexa.hungergameshexa.tasks.WorldBorder1;
+import org.hexa.hungergameshexa.util.GameState;
 
 public class GameManager {
 
