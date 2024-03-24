@@ -15,3 +15,6 @@ commands:
   reset:
     usage: /<command>
     description: Reinicia los cofres
+  droploot:
+    usage: /<command>
+    description: Configura el loot de los drops

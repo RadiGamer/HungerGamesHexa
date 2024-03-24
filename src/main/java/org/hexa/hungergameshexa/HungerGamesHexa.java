@@ -1,14 +1,13 @@
 package org.hexa.hungergameshexa;
 
 import org.bukkit.plugin.java.JavaPlugin;
-import org.hexa.hungergameshexa.commands.LootConfigCommand;
-import org.hexa.hungergameshexa.commands.ResetCommand;
-import org.hexa.hungergameshexa.commands.SetSpawnCommand;
-import org.hexa.hungergameshexa.commands.StartCommand;
+import org.hexa.hungergameshexa.commands.*;
+import org.hexa.hungergameshexa.listeners.DropLootConfigListener;
 import org.hexa.hungergameshexa.listeners.LootConfigListener;
 import org.hexa.hungergameshexa.listeners.PlayerJoinListener;
 import org.hexa.hungergameshexa.listeners.PreGameListener;
 import org.hexa.hungergameshexa.manager.ChestManager;
+import org.hexa.hungergameshexa.manager.DropLootManager;
 import org.hexa.hungergameshexa.manager.GameManager;
 import org.hexa.hungergameshexa.manager.SpawnPointManager;
 
@@ -16,6 +15,7 @@ public final class HungerGamesHexa extends JavaPlugin {
     private GameManager gameManager;
     private SpawnPointManager spawnPointManager;
     private ChestManager chestManager;
+    private DropLootManager dropLootManager;
 
 //TODO NO OLVIDAR METER MULTIVERSE
 
@@ -28,16 +28,21 @@ public final class HungerGamesHexa extends JavaPlugin {
         this.chestManager = new ChestManager(getConfig());
         this.gameManager = new GameManager(this);
         this.spawnPointManager = new SpawnPointManager(this);
+        this.dropLootManager = new DropLootManager(getConfig());
+
         //LISTENERS
         getServer().getPluginManager().registerEvents(new PreGameListener(gameManager),this);
         getServer().getPluginManager().registerEvents(new LootConfigListener(this), this);
         getServer().getPluginManager().registerEvents(chestManager, this);
+        getServer().getPluginManager().registerEvents(dropLootManager, this);
         getServer().getPluginManager().registerEvents(new PlayerJoinListener(this), this);
+        getServer().getPluginManager().registerEvents(new DropLootConfigListener(this), this);
         //COMANDOS
         getCommand("lootconfig").setExecutor(new LootConfigCommand(this));
         getCommand("start").setExecutor(new StartCommand(gameManager));
         getCommand("setspawn").setExecutor(new SetSpawnCommand(spawnPointManager));
         getCommand("reset").setExecutor(new ResetCommand(chestManager));
+        getCommand("droploot").setExecutor(new DropLootConfigCommand(this));
 
     }
 
