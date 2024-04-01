@@ -7,7 +7,6 @@ public enum GameState {
     BORDE1,
     BORDE2,
     BORDE3,
-    BORDE4,
     GANADOR,
     REINICIANDO
 }

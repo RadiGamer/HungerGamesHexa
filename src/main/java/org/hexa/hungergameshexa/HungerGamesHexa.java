@@ -27,7 +27,7 @@ public final class HungerGamesHexa extends JavaPlugin {
         this.gameManager = new GameManager(this);
         this.spawnPointManager = new SpawnPointManager(this);
         this.dropLootManager = new DropLootManager(getConfig());
-        this.timerManager = new TimerManager(this);
+        this.timerManager = new TimerManager(this, gameManager);
 
         //LISTENERS
         getServer().getPluginManager().registerEvents(new PreGameListener(gameManager),this);
