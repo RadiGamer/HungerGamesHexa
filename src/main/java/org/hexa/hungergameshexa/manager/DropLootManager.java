@@ -61,7 +61,7 @@ public class DropLootManager implements Listener {
            if (currentTime < scheduledTime) {
                event.setCancelled(true);
                long timeLeft = (scheduledTime - currentTime) / 1000;
-               player.sendActionBar(ChatColor.RED + "Aun no puedes abrir este drop, tienes que esperar " + timeLeft + " segundos.");
+               player.sendActionBar(ChatColor.RED + "El drop se esta abriendo, tienes que esperar " + timeLeft + " segundos.");
                player.playSound(player.getLocation(), Sound.BLOCK_NOTE_BLOCK_BASS, 10 , 0);
            }
            return;
