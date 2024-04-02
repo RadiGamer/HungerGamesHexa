@@ -26,7 +26,7 @@ public final class HungerGamesHexa extends JavaPlugin {
         this.chestManager = new ChestManager(getConfig());
         this.gameManager = new GameManager(this);
         this.spawnPointManager = new SpawnPointManager(this);
-        this.dropLootManager = new DropLootManager(getConfig());
+        this.dropLootManager = new DropLootManager(this, getConfig());
         this.timeManager = new TimeManager(this, gameManager);
 
         //LISTENERS

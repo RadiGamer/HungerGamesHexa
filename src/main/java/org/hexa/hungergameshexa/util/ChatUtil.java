@@ -7,7 +7,7 @@ public class ChatUtil {
         return ChatColor.translateAlternateColorCodes('&', string);
     }
     public static String format(String string){
-        return preformat("&n&f&l[&c&lHEXA&f&l] " + string);
+        return preformat("&n&f&l[&c&lHEXA&f&l] &r" + string);
     }
 
     // &#FB0000&lH&#EB0055&lE&#DC00AA&lX&#CC00FF&lA

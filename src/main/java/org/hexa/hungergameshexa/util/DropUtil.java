@@ -34,7 +34,7 @@ public class DropUtil {
         FallingBlock fallingBlock = world.spawnFallingBlock(location, Material.BARREL.createBlockData());
         fallingBlock.setDropItem(true);
         fallingBlock.setHurtEntities(false);
-        fallingBlock.setVelocity(new Vector(0, -0.0001, 0));
+        fallingBlock.setVelocity(new Vector(0, -0.01, 0));
 
         new BukkitRunnable(){
             @Override
@@ -42,6 +42,7 @@ public class DropUtil {
                 if(!fallingBlock.isValid() || fallingBlock.isOnGround()){
                     world.playSound(fallingBlock.getLocation(), Sound.BLOCK_BARREL_OPEN, 1.0f, 1.0f);
                     world.spawnParticle(Particle.EXPLOSION_NORMAL, fallingBlock.getLocation(), 20, 0.5, 0.5, 0.5, 0.01);
+                    world.strikeLightningEffect(fallingBlock.getLocation());
 
                     this.cancel();
                 }
