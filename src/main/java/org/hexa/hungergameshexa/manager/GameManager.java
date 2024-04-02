@@ -13,12 +13,12 @@ public class GameManager {
     private GameState gameState = GameState.ESPERANDO;
     private final HungerGamesHexa plugin;
     private StartCountdown startCountdown;
-    private TimerManager timerManager;
+    private TimeManager timeManager;
     private Border border;
 
     public GameManager(HungerGamesHexa plugin) {
         this.plugin = plugin;
-        this.timerManager = new TimerManager(plugin, this);
+        this.timeManager = new TimeManager(plugin, this);
     }
 
     public void setGameState(GameState gameState) {
@@ -36,9 +36,9 @@ public class GameManager {
 
             case ACTIVO:
                 for(Player player : Bukkit.getOnlinePlayers()) {
-                    timerManager.getBossBar().addPlayer(player);
+                    timeManager.getBossBar().addPlayer(player);
                 }
-                timerManager.startTimer();
+                timeManager.startTimer();
 
                 break;
 
@@ -56,7 +56,7 @@ public class GameManager {
 
             case GANADOR:
 
-                timerManager.stopTimer();
+                timeManager.stopTimer();
                 break;
 
             case REINICIANDO:
