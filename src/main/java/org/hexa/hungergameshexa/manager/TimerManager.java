@@ -2,12 +2,15 @@ package org.hexa.hungergameshexa.manager;
 
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
+import org.bukkit.Sound;
 import org.bukkit.World;
+import org.bukkit.block.data.type.NoteBlock;
 import org.bukkit.boss.BarColor;
 import org.bukkit.boss.BarStyle;
 import org.bukkit.boss.BossBar;
 import org.bukkit.entity.Player;
 import org.hexa.hungergameshexa.HungerGamesHexa;
+import org.hexa.hungergameshexa.util.ChatUtil;
 import org.hexa.hungergameshexa.util.GameState;
 
 public class TimerManager {
@@ -21,8 +24,8 @@ public class TimerManager {
     public TimerManager(HungerGamesHexa plugin, GameManager gameManager) {
         this.plugin = plugin;
         this.gameManager = gameManager;
-        bossBar = Bukkit.createBossBar("Tiempo Transcurrido", BarColor.PURPLE, BarStyle.SEGMENTED_20);
-        bossBar.setVisible(true);
+        bossBar = Bukkit.createBossBar("Esperando...", BarColor.YELLOW, BarStyle.SOLID);
+        bossBar.setVisible(false);
 
         for (Player player : Bukkit.getOnlinePlayers()){
             bossBar.addPlayer(player);
@@ -31,6 +34,7 @@ public class TimerManager {
 
     public void startTimer() {
         taskId = Bukkit.getScheduler().scheduleSyncRepeatingTask(plugin, () -> {
+            bossBar.setVisible(true);
 
             World world = Bukkit.getWorld("world");
 
@@ -43,13 +47,32 @@ public class TimerManager {
 
 
 
-            if (minutos >= 5) {
+            if (minutos == 4 && segundos == 30) {
+                Bukkit.broadcastMessage(ChatUtil.format("&cEl borde se cerrará en 30 segundos"));
+                for (Player player : Bukkit.getOnlinePlayers()){
+                    player.playSound(player.getLocation(), Sound.BLOCK_NOTE_BLOCK_PLING, 1, 0);
+                }
+            }
+            if (minutos == 6 && segundos == 30) {
+                Bukkit.broadcastMessage(ChatUtil.format("&c&lEl borde se cerrará en 30 segundos"));
+                for (Player player : Bukkit.getOnlinePlayers()){
+                    player.playSound(player.getLocation(), Sound.BLOCK_NOTE_BLOCK_PLING, 1, 0);
+                }
+            }
+            if (minutos == 8 && segundos == 0) {
+                Bukkit.broadcastMessage(ChatUtil.format("&c&lEl Ultimo borde se cerrará en 30 segundos"));
+                for (Player player : Bukkit.getOnlinePlayers()){
+                    player.playSound(player.getLocation(), Sound.BLOCK_NOTE_BLOCK_PLING, 1, 0);
+                }
+            }
+
+            if (minutos == 5 && segundos == 0) {
                 gameManager.setGameState(GameState.BORDE1);
             }
-            if (minutos >= 7) {
+            if (minutos == 7 && segundos == 0) {
                 gameManager.setGameState(GameState.BORDE2);
             }
-            if (minutos >= 8 && segundos >= 30) {
+            if (minutos == 8 && segundos == 30) {
                 gameManager.setGameState(GameState.BORDE3);
             }
 

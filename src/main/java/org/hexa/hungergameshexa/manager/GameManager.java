@@ -14,7 +14,7 @@ public class GameManager {
     private final HungerGamesHexa plugin;
     private StartCountdown startCountdown;
     private TimerManager timerManager;
-    private Border border = new Border();
+    private Border border;
 
     public GameManager(HungerGamesHexa plugin) {
         this.plugin = plugin;
@@ -43,15 +43,15 @@ public class GameManager {
                 break;
 
             case BORDE1:
-                Border.setBorder(500, 100);
+                Border.setBorder(500,100);
                 break;
 
             case BORDE2:
-                Border.setBorder(300, 100);
+                Border.setBorder(300,100);
                 break;
 
             case BORDE3:
-                Border.setBorder(100, 100);
+                Border.setBorder(100,100);
                 break;
 
             case GANADOR:
@@ -60,6 +60,10 @@ public class GameManager {
                 break;
 
             case REINICIANDO:
+                Border.setBorder(700,100);
+                for (Player player : Bukkit.getOnlinePlayers()){
+                    player.kickPlayer(ChatColor.GOLD + "El juego se esta reiniciando");
+                }
 
                 break;
 
