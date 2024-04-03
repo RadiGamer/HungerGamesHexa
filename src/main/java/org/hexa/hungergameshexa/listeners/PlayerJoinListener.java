@@ -11,6 +11,9 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
+import org.bukkit.scoreboard.Scoreboard;
+import org.bukkit.scoreboard.ScoreboardManager;
+import org.bukkit.scoreboard.Team;
 import org.hexa.hungergameshexa.HungerGamesHexa;
 import org.hexa.hungergameshexa.manager.SpawnPointManager;
 import org.hexa.hungergameshexa.util.ChatUtil;
@@ -23,110 +26,6 @@ import java.util.UUID;
 
 public class PlayerJoinListener implements Listener {
 
-    /* private final SpawnPointManager spawnPointManager;
-
-    public PlayerJoinListener(SpawnPointManager spawnPointManager) {
-        this.spawnPointManager = spawnPointManager;
-    }
-
-    @EventHandler
-    public void onPlayerJoin(PlayerJoinEvent event) {
-        spawnPointManager.handlePlayerJoin(event.getPlayer());
-    }
--------------------------
-        private final HungerGamesHexa plugin;
-        private final Map<UUID, Integer> playerSpawnPoints = new HashMap<>();
-        private final boolean[] availableSpawns = new boolean[16]; // Assuming 16 spawn points
-        private File playerDataFile;
-        private FileConfiguration playerData;
-
-        public PlayerJoinListener(HungerGamesHexa plugin) {
-            this.plugin = plugin;
-            // Load player data file
-            playerDataFile = new File(plugin.getDataFolder(), "playerdata.yml");
-            playerData = YamlConfiguration.loadConfiguration(playerDataFile);
-
-            // Initially, all spawn points are available
-            for (int i = 0; i < availableSpawns.length; i++) {
-                availableSpawns[i] = true;
-            }
-        }
-
-        @EventHandler
-        public void onPlayerJoin(PlayerJoinEvent event) {
-            Player player = event.getPlayer();
-            // Check if player has the "hexa.admin" permission
-            if (player.hasPermission("hexa.admin")) {
-                return; // Do not assign spawn points to these players
-            }
-
-            Integer assignedSpawn = playerSpawnPoints.get(player.getUniqueId());
-            if (assignedSpawn != null) {
-                teleportToSpawn(player, assignedSpawn);
-            } else {
-                // Find an available spawn point
-                assignedSpawn = findAvailableSpawn();
-                if (assignedSpawn != -1) {
-                    playerSpawnPoints.put(player.getUniqueId(), assignedSpawn);
-                    teleportToSpawn(player, assignedSpawn);
-                    savePlayerData(player.getUniqueId(), assignedSpawn);
-                } else {
-                    player.kickPlayer("All spawn points are currently occupied. Please try again later.");
-                }
-            }
-        }
-
-        private Integer findAvailableSpawn() {
-            for (int i = 0; i < availableSpawns.length; i++) {
-                if (availableSpawns[i]) {
-                    availableSpawns[i] = false; // Mark as taken
-                    return i;
-                }
-            }
-            return -1; // No available spawn points
-        }
-
-        private void teleportToSpawn(Player player, int spawnIndex) {
-            String path = "spawnpoints." + (spawnIndex + 1);
-            FileConfiguration config = plugin.getConfig();
-            World world = Bukkit.getWorld(config.getString(path + ".world"));
-            double x = config.getDouble(path + ".x");
-            double y = config.getDouble(path + ".y");
-            double z = config.getDouble(path + ".z");
-            float yaw = (float) config.getDouble(path + ".yaw");
-            float pitch = (float) config.getDouble(path + ".pitch");
-
-            Location spawnLocation = new Location(world, x, y, z, yaw, pitch);
-            player.teleport(spawnLocation);
-        }
-
-        @EventHandler
-        public void onPlayerQuit(PlayerQuitEvent event) {
-            Player player = event.getPlayer();
-            Integer spawnPointIndex = playerSpawnPoints.remove(player.getUniqueId());
-            if (spawnPointIndex != null) {
-                availableSpawns[spawnPointIndex] = true; // Mark as available again
-                removePlayerData(player.getUniqueId());
-            }
-        }
-
-        private void savePlayerData(UUID playerId, int spawnIndex) {
-            playerData.set(playerId.toString(), spawnIndex);
-            try {
-                playerData.save(playerDataFile);
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        }
-
-        private void removePlayerData(UUID playerId) {
-            playerData.set(playerId.toString(), null);
-            try {
-                playerData.save(playerDataFile);
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        }*/
 
     private Map<UUID, Integer> playerSpawnMap = new HashMap<>();
     private Map<Integer, Boolean> spawnOccupied = new HashMap<>();
@@ -158,7 +57,7 @@ public class PlayerJoinListener implements Listener {
     public void onPlayerQuit(PlayerQuitEvent event) {
         Player player = event.getPlayer();
         if (player.hasPermission("hexa.admin")) {
-            return; // Ignore players with admin permission
+            return;
         }
 
         UUID playerId = player.getUniqueId();
@@ -180,7 +79,6 @@ public class PlayerJoinListener implements Listener {
     }
 
     private Location getSpawnLocation(int spawnNumber) {
-        // Assuming the spawnpoints are defined in the "world" world
         plugin.reloadConfig();
         FileConfiguration config = plugin.getConfig();
         World world = Bukkit.getWorld("world");
@@ -192,4 +90,6 @@ public class PlayerJoinListener implements Listener {
 
         return new Location(world, x, y, z, yaw, pitch);
     }
+
+
 }

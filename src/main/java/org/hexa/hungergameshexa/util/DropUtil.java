@@ -10,10 +10,11 @@ import org.hexa.hungergameshexa.HungerGamesHexa;
 import java.util.Random;
 
 public class DropUtil {
-    public static void dropBarrelRandomly(HungerGamesHexa plugin, World world) {
-        Location randomLocation = getRandomLocation(world);
+    public static void dropBarrelRandomly(HungerGamesHexa plugin) {
+                                        //(HungerGamesHexa plugin, World world)
+        Location randomLocation = getRandomLocation(Bukkit.getWorld("world"));
         if (randomLocation != null) {
-            dropBarrel(plugin, world, randomLocation);
+            dropBarrel(plugin, Bukkit.getWorld("world"), randomLocation);
         }
     }
 

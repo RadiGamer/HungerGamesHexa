@@ -18,13 +18,10 @@ public class TimeManager {
     private int gameTime;
     private final HungerGamesHexa plugin;
     private GameManager gameManager;
-    private DropLootManager dropLootManager;
 
     public TimeManager(HungerGamesHexa plugin, GameManager gameManager) {
         this.plugin = plugin;
         this.gameManager = gameManager;
-        bossBar = Bukkit.createBossBar("Esperando...", BarColor.YELLOW, BarStyle.SOLID);
-        bossBar.setVisible(true);
 
         for (Player player : Bukkit.getOnlinePlayers()){
             bossBar.addPlayer(player);
@@ -33,10 +30,9 @@ public class TimeManager {
 
     public void startTimer() {
         taskId = Bukkit.getScheduler().scheduleSyncRepeatingTask(plugin, () -> {
-            bossBar.setVisible(true);
 
             World world = Bukkit.getWorld("world");
-
+            bossBar.setVisible(true);
             gameTime++;
             int minutos = gameTime / 60;
             int segundos = gameTime % 60;
@@ -53,13 +49,13 @@ public class TimeManager {
                     player.playSound(player.getLocation(), Sound.BLOCK_NOTE_BLOCK_PLING, 1, 0);
                 }
             }
-            if (minutos == 6 && segundos == 30) {
+            if (minutos == 7 && segundos == 30) {
                 Bukkit.broadcastMessage(ChatUtil.format("&c&lEl borde se cerrará en 30 segundos"));
                 for (Player player : Bukkit.getOnlinePlayers()){
                     player.playSound(player.getLocation(), Sound.BLOCK_NOTE_BLOCK_PLING, 1, 0);
                 }
             }
-            if (minutos == 8 && segundos == 0) {
+            if (minutos == 10 && segundos == 0) {
                 Bukkit.broadcastMessage(ChatUtil.format("&c&lEl ultimo borde se cerrará en 30 segundos"));
                 for (Player player : Bukkit.getOnlinePlayers()){
                     player.playSound(player.getLocation(), Sound.BLOCK_NOTE_BLOCK_PLING, 1, 0);
@@ -70,10 +66,10 @@ public class TimeManager {
             if (minutos == 5 && segundos == 0) {
                 gameManager.setGameState(GameState.BORDE1);
             }
-            if (minutos == 7 && segundos == 0) {
+            if (minutos == 8 && segundos == 0) {
                 gameManager.setGameState(GameState.BORDE2);
             }
-            if (minutos == 8 && segundos == 30) {
+            if (minutos == 10 && segundos == 30) {
                 gameManager.setGameState(GameState.BORDE3);
             }
 

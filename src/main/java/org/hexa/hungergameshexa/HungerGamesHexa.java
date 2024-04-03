@@ -14,6 +14,7 @@ public final class HungerGamesHexa extends JavaPlugin {
     private ChestManager chestManager;
     private DropLootManager dropLootManager;
     private TimeManager timeManager;
+    private PlayerManager playerManager;
 
 //TODO NO OLVIDAR METER MULTIVERSE
 
@@ -28,6 +29,7 @@ public final class HungerGamesHexa extends JavaPlugin {
         this.spawnPointManager = new SpawnPointManager(this);
         this.dropLootManager = new DropLootManager(this, getConfig());
         this.timeManager = new TimeManager(this, gameManager);
+        this.playerManager = new PlayerManager(this, gameManager);
 
         //LISTENERS
         getServer().getPluginManager().registerEvents(new PreGameListener(gameManager),this);
@@ -36,6 +38,7 @@ public final class HungerGamesHexa extends JavaPlugin {
         getServer().getPluginManager().registerEvents(dropLootManager, this);
         getServer().getPluginManager().registerEvents(new PlayerJoinListener(this), this);
         getServer().getPluginManager().registerEvents(new DropLootConfigListener(this), this);
+        getServer().getPluginManager().registerEvents(playerManager, this);
 
         //COMANDOS
         getCommand("lootconfig").setExecutor(new LootConfigCommand(this));

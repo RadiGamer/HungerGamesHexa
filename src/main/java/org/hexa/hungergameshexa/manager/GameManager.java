@@ -6,6 +6,7 @@ import org.bukkit.entity.Player;
 import org.hexa.hungergameshexa.HungerGamesHexa;
 import org.hexa.hungergameshexa.tasks.StartCountdown;
 import org.hexa.hungergameshexa.tasks.Border;
+import org.hexa.hungergameshexa.util.DropUtil;
 import org.hexa.hungergameshexa.util.GameState;
 
 public class GameManager {
@@ -26,6 +27,7 @@ public class GameManager {
         switch (gameState){
 
             case ESPERANDO:
+                this.startCountdown.cancel();
 
                 break;
 
@@ -43,15 +45,16 @@ public class GameManager {
                 break;
 
             case BORDE1:
-                Border.setBorder(500,100);
+                Border.setBorder(500,70);
                 break;
 
             case BORDE2:
-                Border.setBorder(300,100);
+                DropUtil.dropBarrelRandomly(plugin);
+                Border.setBorder(300,70);
                 break;
 
             case BORDE3:
-                Border.setBorder(100,100);
+                Border.setBorder(100,70);
                 break;
 
             case GANADOR:
@@ -67,7 +70,7 @@ public class GameManager {
 
                 break;
 
-        }//TODO Faltan los demas GameStates
+        }
     }
     public GameState getGameState() {
         return gameState;
