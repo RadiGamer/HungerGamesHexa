@@ -22,16 +22,13 @@ public class TimeManager {
     public TimeManager(HungerGamesHexa plugin, GameManager gameManager) {
         this.plugin = plugin;
         this.gameManager = gameManager;
-
-        for (Player player : Bukkit.getOnlinePlayers()){
-            bossBar.addPlayer(player);
-        }
+        bossBar = Bukkit.createBossBar(ChatColor.BOLD + "Esperando...", BarColor.YELLOW, BarStyle.SOLID);
     }
 
     public void startTimer() {
         taskId = Bukkit.getScheduler().scheduleSyncRepeatingTask(plugin, () -> {
 
-            World world = Bukkit.getWorld("world");
+            World world = Bukkit.getWorld("world_1");
             bossBar.setVisible(true);
             gameTime++;
             int minutos = gameTime / 60;

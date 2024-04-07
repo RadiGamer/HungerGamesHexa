@@ -1,5 +1,6 @@
 package org.hexa.hungergameshexa;
 
+import org.bukkit.Bukkit;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.hexa.hungergameshexa.commands.*;
 import org.hexa.hungergameshexa.listeners.DropLootConfigListener;
@@ -20,6 +21,7 @@ public final class HungerGamesHexa extends JavaPlugin {
 
     @Override
     public void onEnable() {
+        Bukkit.getConsoleSender().sendMessage("§aActivado Survival Games");
         saveDefaultConfig();
 
 
@@ -47,11 +49,13 @@ public final class HungerGamesHexa extends JavaPlugin {
         getCommand("reset").setExecutor(new ResetCommand(chestManager));
         getCommand("droploot").setExecutor(new DropLootConfigCommand(this));
         getCommand("drop").setExecutor(new DropCommand(this));
-
+        getCommand("ganador").setExecutor(new GanadorCommand(this, gameManager));
+        getCommand("esperando").setExecutor(new EsperandoCommand(gameManager));
     }
 
     @Override
     public void onDisable() {
+        Bukkit.getConsoleSender().sendMessage("§4Desactivando SurvivalGames");
         // Plugin shutdown logic
     }
 }

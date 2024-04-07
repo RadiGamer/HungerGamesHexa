@@ -9,7 +9,7 @@ import org.bukkit.entity.Player;
 public class Border {
 
     public static void setBorder(int size, int time){
-        World world = Bukkit.getWorld("world");
+        World world = Bukkit.getWorld("world_1");
         WorldBorder worldBorder = world.getWorldBorder();
 
         for(Player player : Bukkit.getOnlinePlayers()){

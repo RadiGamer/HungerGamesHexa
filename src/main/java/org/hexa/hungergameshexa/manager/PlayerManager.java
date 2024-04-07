@@ -8,9 +8,11 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.entity.PlayerDeathEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
+import org.bukkit.scheduler.BukkitRunnable;
 import org.bukkit.scoreboard.Scoreboard;
 import org.bukkit.scoreboard.Team;
 import org.hexa.hungergameshexa.HungerGamesHexa;
+import org.hexa.hungergameshexa.tasks.StartCountdown;
 import org.hexa.hungergameshexa.util.ChatUtil;
 import org.hexa.hungergameshexa.util.GameState;
 
@@ -18,7 +20,10 @@ public class PlayerManager implements Listener {
     private final HungerGamesHexa plugin;
     private Team jugadores;
     private final GameManager gameManager;
+    private boolean isStarted;
+    private int TaskId = -1;
 
+//TODO AGREGAR QUE NO SE CUENTE A LA GENTE CON EL PERMISO DE HEXA.ADMIN
     public PlayerManager(HungerGamesHexa plugin, GameManager gameManager) {
         this.plugin = plugin;
         this.gameManager = gameManager;
@@ -33,27 +38,19 @@ public class PlayerManager implements Listener {
     }
     @EventHandler
     public void onPlayerJoin(PlayerJoinEvent event){
-        jugadores.addEntry(event.getPlayer().getName());
-        event.setJoinMessage(ChatUtil.format("&9"+event.getPlayer().getName() + "&7 se ha unido al juego &3" + jugadores.getEntries().size() + "/16"));
+        Player player = event.getPlayer();
+        if(!player.hasPermission("hexa.admin")) {
+            jugadores.addEntry(player.getName());
+            event.setJoinMessage(ChatUtil.format("&9" + player.getName() + "&7 se ha unido al juego &3" + jugadores.getEntries().size() + "/16"));
+        }else{
+            event.setJoinMessage(ChatUtil.format("&9" + player.getName() + "&7 se ha unido al juego &3"));
+        }
     }
     @EventHandler
-    public void onPlayerQuit(PlayerQuitEvent event){
-        jugadores.removeEntry(event.getPlayer().getName());
-    }
-
-    public void checkPlayers() {
-        if(!(gameManager.getGameState() == GameState.ESPERANDO || gameManager.getGameState() == GameState.COMENZANDO)) {
-            Bukkit.getScheduler().runTask(plugin, () -> {
-                int teamSize = jugadores.getEntries().size();
-                if (teamSize >= 8) {
-                    gameManager.setGameState(GameState.COMENZANDO);
-                } else if (teamSize < 7) {
-                    gameManager.setGameState(GameState.ESPERANDO);
-                }
-                if((gameManager.getGameState() == GameState.BORDE1 || gameManager.getGameState() == GameState.BORDE2 || gameManager.getGameState() == GameState.BORDE3) && teamSize==1){
-                    gameManager.setGameState(GameState.GANADOR);
-                }
-            });
+    public void onPlayerQuit(PlayerQuitEvent event) {
+        Player player = event.getPlayer();
+        if (!player.hasPermission("hexa.admin")) {
+            jugadores.removeEntry(player.getName());
         }
     }
     @EventHandler
@@ -68,6 +65,31 @@ public class PlayerManager implements Listener {
             player.setGameMode(GameMode.SPECTATOR);
         }, 1L);
 
+    }
+    public void playerCheck(){
+        GameState currentState = gameManager.getGameState();
+        new BukkitRunnable(){
+            @Override
+            public void run(){
+                if(jugadores.getEntries().size()>=2 && !isStarted && currentState == GameState.ESPERANDO){ //TODO CAMBIAR A 8
+                    gameManager.setGameState(GameState.COMENZANDO);
+                    setStarted(true);
+                } else if (jugadores.getEntries().size()<=1 && isStarted && currentState == GameState.COMENZANDO) {
+                    setStarted(false);
+                    gameManager.setGameState(GameState.ESPERANDO);
+                }else if (jugadores.getEntries().size() == 1 && isStarted && (currentState == GameState.ACTIVO ||currentState == GameState.BORDE1 ||currentState == GameState.BORDE2 ||currentState == GameState.BORDE3)){
+                    gameManager.setGameState(GameState.GANADOR);
+                }
+            }
+        }.runTaskTimerAsynchronously(plugin, 0 , 20L);
+    }
+
+    public boolean isStarted() {
+        return isStarted;
+    }
+
+    public void setStarted(boolean started) {
+        isStarted = started;
     }
 }
 

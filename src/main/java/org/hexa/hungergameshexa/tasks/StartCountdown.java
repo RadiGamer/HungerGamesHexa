@@ -1,6 +1,8 @@
 package org.hexa.hungergameshexa.tasks;
 
 import org.bukkit.Bukkit;
+import org.bukkit.Sound;
+import org.bukkit.entity.Player;
 import org.bukkit.scheduler.BukkitRunnable;
 import org.hexa.hungergameshexa.manager.GameManager;
 import org.hexa.hungergameshexa.util.GameState;
@@ -21,9 +23,15 @@ public class StartCountdown extends BukkitRunnable {
         if(timeLeft<=0){
             cancel();
             gameManager.setGameState(GameState.ACTIVO);
+            for(Player player : Bukkit.getOnlinePlayers()){
+                player.playSound(player.getLocation(), Sound.ENTITY_ENDER_DRAGON_AMBIENT, 1 , 0);
+            }
             return;
         }
         Bukkit.broadcastMessage(ChatUtil.format("&7Empieza en &a"+timeLeft));
+        for(Player player : Bukkit.getOnlinePlayers()){
+            player.playSound(player.getLocation(), Sound.BLOCK_NOTE_BLOCK_PLING, 1 , 0);
+        }
 //TODO AGREGAR QUE APARTIR DE 10 SEGUNDOS COMIENZA LA CUENTA ATRAS
     }
 }

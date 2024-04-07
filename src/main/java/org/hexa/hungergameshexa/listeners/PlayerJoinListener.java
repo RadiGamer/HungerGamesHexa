@@ -81,7 +81,7 @@ public class PlayerJoinListener implements Listener {
     private Location getSpawnLocation(int spawnNumber) {
         plugin.reloadConfig();
         FileConfiguration config = plugin.getConfig();
-        World world = Bukkit.getWorld("world");
+        World world = Bukkit.getWorld("world_1");
         double x = config.getDouble("spawnpoints." + spawnNumber + ".x");
         double y = config.getDouble("spawnpoints." + spawnNumber + ".y");
         double z = config.getDouble("spawnpoints." + spawnNumber + ".z");

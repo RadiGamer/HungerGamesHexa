@@ -21,3 +21,9 @@ commands:
   drop:
     usage: /<command>
     description: Tira un Drop cuando se desee (Eliminar)
+  ganador:
+    usage: /<command>
+    description: Cambia el gamestate a GANADOR
+  esperando:
+    usage: /<command>
+    description: Cambia el gamestate a ESPERANDO

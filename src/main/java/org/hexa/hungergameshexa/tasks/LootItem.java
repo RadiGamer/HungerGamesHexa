@@ -77,5 +77,3 @@ public class LootItem {
 
 
 }
-
-//TODO TESTEAR CUSTOM MODEL DATA

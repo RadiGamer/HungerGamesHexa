@@ -1,26 +1,149 @@
+spawnpoints:
+  '1':
+    world: world_1
+    x: 0.5760213691924665
+    y: 64.5
+    z: -101.3477350965392
+    yaw: -3.1891465E-4
+    pitch: -0.15080263
+  '2':
+    world: world_1
+    x: 21.492904593633593
+    y: 64.5
+    z: -82.50515196290151
+    yaw: 26.699615
+    pitch: -0.4508235
+  '3':
+    world: world_1
+    x: 40.458651682764035
+    y: 64.5
+    z: -62.37204260303039
+    yaw: 34.4997
+    pitch: -1.8005817
+  '4':
+    world: world_1
+    x: 40.489373905356025
+    y: 64.5
+    z: -31.49626814004815
+    yaw: 53.399487
+    pitch: -1.3505856
+  '5':
+    world: world_1
+    x: 40.435361017031454
+    y: 64.5
+    z: 0.4771537148084135
+    yaw: 90.29927
+    pitch: -3.1505382
+  '6':
+    world: world_1
+    x: 40.28394213633874
+    y: 64.5
+    z: 32.530395154773146
+    yaw: 128.24971
+    pitch: -2.1004608
+  '7':
+    world: world_1
+    x: 40.44272964827383
+    y: 64.5
+    z: 64.49883595091347
+    yaw: 149.2498
+    pitch: -2.7004488
+  '8':
+    world: world_1
+    x: 21.4989696869348
+    y: 64.5
+    z: 83.58476401517918
+    yaw: 164.99937
+    pitch: -1.3503784
+  '9':
+    world: world_1
+    x: 0.4535784778498867
+    y: 64.5
+    z: 102.24932371773272
+    yaw: -179.85078
+    pitch: -0.6001619
+  '10':
+    world: world_1
+    x: -20.456705751589467
+    y: 64.5
+    z: 83.35451892745913
+    yaw: -163.80199
+    pitch: -1.0502058
+  '11':
+    world: world_1
+    x: -39.44808555625054
+    y: 64.5
+    z: 64.38368484645436
+    yaw: -145.05212
+    pitch: -1.6500685
+  '12':
+    world: world_1
+    x: -39.377682498732966
+    y: 64.5
+    z: 32.36577227689091
+    yaw: -127.803024
+    pitch: -2.5498726
+  '13':
+    world: world_1
+    x: -39.4264866608621
+    y: 64.5
+    z: 0.4517573790207828
+    yaw: -89.7052
+    pitch: -3.1496444
+  '14':
+    world: world_1
+    x: -39.33127520843722
+    y: 64.5
+    z: -31.441884773170663
+    yaw: -51.756714
+    pitch: -1.0495754
+  '15':
+    world: world_1
+    x: -39.52183055642045
+    y: 64.5
+    z: -63.56613224557435
+    yaw: -32.859436
+    pitch: -2.0993454
+  '16':
+    world: world_1
+    x: -20.49522003071147
+    y: 64.5
+    z: -82.4924574626331
+    yaw: -14.111725
+    pitch: -1.9493214
 lootItems:
   '0':
-    material: STRIPPED_OAK_LOG
+    material: CROSSBOW
+    name: §f§l AK47
+    customModelData: 7
     minAmount: 1
     maxAmount: 1
-    chance: 0.1
+    chance: 1.0
   '1':
-    material: OAK_SLAB
+    material: CROSSBOW
+    name: §f§l SCAR
+    customModelData: 4
     minAmount: 1
     maxAmount: 1
     chance: 0.1
   '2':
-    material: OAK_FENCE
+    material: CROSSBOW
+    name: §f§l Kar98k
+    customModelData: 6
     minAmount: 1
     maxAmount: 1
     chance: 0.1
   '3':
-    material: OAK_FENCE_GATE
+    material: CROSSBOW
+    name: §f§l M249
+    customModelData: 5
     minAmount: 1
     maxAmount: 1
     chance: 0.1
   '4':
-    material: OAK_LOG
+    material: CROSSBOW
+    name: §f§l M401
+    customModelData: 8
     minAmount: 1
     maxAmount: 1
     chance: 0.1
@@ -402,141 +525,6 @@ dropLoot:
     chance: 0.1
   '26':
     material: ORANGE_WOOL
-    minAmount: 1
-    maxAmount: 1
-    chance: 0.1
-  '27':
-    material: BLACK_BED
-    minAmount: 1
-    maxAmount: 1
-    chance: 0.1
-  '28':
-    material: CYAN_BED
-    minAmount: 1
-    maxAmount: 1
-    chance: 0.1
-  '29':
-    material: WHITE_BED
-    minAmount: 1
-    maxAmount: 1
-    chance: 0.1
-  '30':
-    material: YELLOW_BED
-    minAmount: 1
-    maxAmount: 1
-    chance: 0.1
-  '31':
-    material: BROWN_SHULKER_BOX
-    minAmount: 1
-    maxAmount: 1
-    chance: 0.1
-  '32':
-    material: RED_SHULKER_BOX
-    minAmount: 1
-    maxAmount: 1
-    chance: 0.1
-  '33':
-    material: LIGHT_GRAY_BED
-    minAmount: 1
-    maxAmount: 1
-    chance: 0.1
-  '34':
-    material: RED_BED
-    minAmount: 1
-    maxAmount: 1
-    chance: 0.1
-  '35':
-    material: LIME_SHULKER_BOX
-    minAmount: 1
-    maxAmount: 1
-    chance: 0.1
-  '36':
-    material: GREEN_SHULKER_BOX
-    minAmount: 1
-    maxAmount: 1
-    chance: 0.1
-  '37':
-    material: YELLOW_SHULKER_BOX
-    minAmount: 1
-    maxAmount: 1
-    chance: 0.1
-  '38':
-    material: MAGENTA_SHULKER_BOX
-    minAmount: 1
-    maxAmount: 1
-    chance: 0.1
-  '39':
-    material: GRAY_SHULKER_BOX
-    minAmount: 1
-    maxAmount: 1
-    chance: 0.1
-  '40':
-    material: PINK_SHULKER_BOX
-    minAmount: 1
-    maxAmount: 1
-    chance: 0.1
-  '41':
-    material: CYAN_SHULKER_BOX
-    minAmount: 1
-    maxAmount: 1
-    chance: 0.1
-  '42':
-    material: GRAY_BED
-    minAmount: 1
-    maxAmount: 1
-    chance: 0.1
-  '43':
-    material: ORANGE_SHULKER_BOX
-    minAmount: 1
-    maxAmount: 1
-    chance: 0.1
-  '44':
-    material: BLACK_SHULKER_BOX
-    minAmount: 1
-    maxAmount: 1
-    chance: 0.1
-  '45':
-    material: DIAMOND
-    minAmount: 1
-    maxAmount: 1
-    chance: 0.1
-  '46':
-    material: CHARCOAL
-    minAmount: 1
-    maxAmount: 1
-    chance: 0.1
-  '47':
-    material: SNOWBALL
-    minAmount: 1
-    maxAmount: 1
-    chance: 0.1
-  '48':
-    material: SLIME_BALL
-    minAmount: 1
-    maxAmount: 1
-    chance: 0.1
-  '49':
-    material: RAW_GOLD
-    minAmount: 1
-    maxAmount: 1
-    chance: 0.1
-  '50':
-    material: RAW_COPPER
-    minAmount: 1
-    maxAmount: 1
-    chance: 0.1
-  '51':
-    material: FIRE_CHARGE
-    minAmount: 1
-    maxAmount: 1
-    chance: 0.1
-  '52':
-    material: HEART_OF_THE_SEA
-    minAmount: 1
-    maxAmount: 1
-    chance: 0.1
-  '53':
-    material: COAL
     minAmount: 1
     maxAmount: 1
     chance: 0.1

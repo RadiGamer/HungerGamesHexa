@@ -8,6 +8,7 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.block.BlockBreakEvent;
 import org.bukkit.event.player.PlayerMoveEvent;
 import org.hexa.hungergameshexa.manager.GameManager;
+import org.hexa.hungergameshexa.util.ChatUtil;
 import org.hexa.hungergameshexa.util.GameState;
 
 import java.util.HashMap;
@@ -35,7 +36,7 @@ public class PreGameListener implements Listener {
                 long currentTime = System.currentTimeMillis();
                 long lastMessageTime = messageCooldowns.getOrDefault(player.getUniqueId(), 0L);
                 if (currentTime - lastMessageTime > MESSAGE_COOLDOWN_MS) {
-                    player.sendMessage(ChatColor.RED + "Aún no te puedes mover.");
+                    player.sendMessage(ChatUtil.format( "&cAún no te puedes mover."));
                     player.playSound(player.getLocation(), Sound.BLOCK_NOTE_BLOCK_BASS, 10, 1);
                     messageCooldowns.put(player.getUniqueId(), currentTime);
                 }
