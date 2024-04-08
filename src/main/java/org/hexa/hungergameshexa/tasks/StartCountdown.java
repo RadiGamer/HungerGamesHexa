@@ -15,7 +15,7 @@ public class StartCountdown extends BukkitRunnable {
     public StartCountdown(GameManager gameManager){
         this.gameManager = gameManager;
     }
-    private int timeLeft = 10; //TODO Colocar valor final despues de testear y borrar el comentario
+    private int timeLeft = 90; //TODO Colocar valor final despues de testear y borrar el comentario
 
     @Override
     public void run() {
@@ -28,10 +28,25 @@ public class StartCountdown extends BukkitRunnable {
             }
             return;
         }
-        Bukkit.broadcastMessage(ChatUtil.format("&7Empieza en &a"+timeLeft));
-        for(Player player : Bukkit.getOnlinePlayers()){
-            player.playSound(player.getLocation(), Sound.BLOCK_NOTE_BLOCK_PLING, 1 , 0);
+        if(timeLeft<10){
+            Bukkit.broadcastMessage(ChatUtil.format("&7La partida empieza en &a"+timeLeft));
+            for(Player player : Bukkit.getOnlinePlayers()){
+                player.playSound(player.getLocation(), Sound.BLOCK_NOTE_BLOCK_PLING, 1 , 0);
+            }
         }
+        if(timeLeft==60){
+            Bukkit.broadcastMessage(ChatUtil.format("&7La partida empieza en &a1 &7minuto"));
+            for(Player player : Bukkit.getOnlinePlayers()){
+                player.playSound(player.getLocation(), Sound.BLOCK_NOTE_BLOCK_PLING, 1 , 0);
+            }
+        }
+        if(timeLeft==90){
+            Bukkit.broadcastMessage(ChatUtil.format("&7La partida empieza en &a1 &7minuto y &a30 &7segundos"));
+            for(Player player : Bukkit.getOnlinePlayers()){
+                player.playSound(player.getLocation(), Sound.BLOCK_NOTE_BLOCK_PLING, 1 , 0);
+            }
+        }
+
 //TODO AGREGAR QUE APARTIR DE 10 SEGUNDOS COMIENZA LA CUENTA ATRAS
     }
 }

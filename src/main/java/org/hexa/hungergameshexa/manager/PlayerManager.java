@@ -77,14 +77,16 @@ public class PlayerManager implements Listener {
         new BukkitRunnable(){
             @Override
             public void run(){
-                if(jugadores.getEntries().size()>=2 && !isStarted && currentState == GameState.ESPERANDO){ //TODO CAMBIAR A 8
+                if(jugadores.getEntries().size()>=8 && !isStarted && currentState == GameState.ESPERANDO){
                     gameManager.setGameState(GameState.COMENZANDO);
                     Bukkit.broadcastMessage(ChatUtil.format("a")); //TODO QUITAR ESTO
                     setStarted(true);
-                } else if (jugadores.getEntries().size()<=1 && isStarted && currentState == GameState.COMENZANDO) {
+                }
+                if (jugadores.getEntries().size()<=7 && isStarted && currentState == GameState.COMENZANDO) {
                     setStarted(false);
                     gameManager.setGameState(GameState.ESPERANDO);
-                }else if (jugadores.getEntries().size() == 1 && isStarted && (currentState == GameState.ACTIVO ||currentState == GameState.BORDE1 ||currentState == GameState.BORDE2 ||currentState == GameState.BORDE3)){
+                }
+                if (jugadores.getEntries().size() == 1 && isStarted && (currentState == GameState.ACTIVO ||currentState == GameState.BORDE1 ||currentState == GameState.BORDE2 ||currentState == GameState.BORDE3)){
                     gameManager.setGameState(GameState.GANADOR);
                 }
             }
