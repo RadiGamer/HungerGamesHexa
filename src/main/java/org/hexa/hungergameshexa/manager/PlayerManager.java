@@ -28,6 +28,7 @@ public class PlayerManager implements Listener {
         this.plugin = plugin;
         this.gameManager = gameManager;
         setupTeamJugadores();
+        playerCheck();
     }
     private void setupTeamJugadores(){
         Scoreboard scoreboard = plugin.getServer().getScoreboardManager().getMainScoreboard();
@@ -39,6 +40,8 @@ public class PlayerManager implements Listener {
     @EventHandler
     public void onPlayerJoin(PlayerJoinEvent event){
         Player player = event.getPlayer();
+        player.setHealth(20);
+        player.setFoodLevel(20);
         if(!player.hasPermission("hexa.admin")) {
             jugadores.addEntry(player.getName());
             event.setJoinMessage(ChatUtil.format("&9" + player.getName() + "&7 se ha unido al juego &3" + jugadores.getEntries().size() + "/16"));
@@ -51,6 +54,9 @@ public class PlayerManager implements Listener {
         Player player = event.getPlayer();
         if (!player.hasPermission("hexa.admin")) {
             jugadores.removeEntry(player.getName());
+            event.setQuitMessage(ChatUtil.format("&9" + player.getName() + "&7 ha abandonado el juego &3 " + jugadores.getEntries().size() + "/16"));
+        }else{
+            event.setQuitMessage(ChatUtil.format("&9" + player.getName() + "&7 ha abandonado el juego &3"));
         }
     }
     @EventHandler
@@ -73,6 +79,7 @@ public class PlayerManager implements Listener {
             public void run(){
                 if(jugadores.getEntries().size()>=2 && !isStarted && currentState == GameState.ESPERANDO){ //TODO CAMBIAR A 8
                     gameManager.setGameState(GameState.COMENZANDO);
+                    Bukkit.broadcastMessage(ChatUtil.format("a")); //TODO QUITAR ESTO
                     setStarted(true);
                 } else if (jugadores.getEntries().size()<=1 && isStarted && currentState == GameState.COMENZANDO) {
                     setStarted(false);
@@ -81,11 +88,7 @@ public class PlayerManager implements Listener {
                     gameManager.setGameState(GameState.GANADOR);
                 }
             }
-        }.runTaskTimerAsynchronously(plugin, 0 , 20L);
-    }
-
-    public boolean isStarted() {
-        return isStarted;
+        }.runTaskTimerAsynchronously(plugin, 0 , 20);
     }
 
     public void setStarted(boolean started) {

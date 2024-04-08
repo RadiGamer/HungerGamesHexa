@@ -24,7 +24,7 @@ public class StartCountdown extends BukkitRunnable {
             cancel();
             gameManager.setGameState(GameState.ACTIVO);
             for(Player player : Bukkit.getOnlinePlayers()){
-                player.playSound(player.getLocation(), Sound.ENTITY_ENDER_DRAGON_AMBIENT, 1 , 0);
+                player.playSound(player.getLocation(), Sound.BLOCK_AMETHYST_BLOCK_RESONATE, 1 , 0);
             }
             return;
         }

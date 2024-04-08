@@ -46,7 +46,7 @@ public class EndGameTask {
                 }
                 Firework fw = player.getWorld().spawn(location, Firework.class);
                 FireworkMeta meta = fw.getFireworkMeta();
-                meta.addEffect(FireworkEffect.builder().withColor(Color.BLUE).withFlicker().build());
+                meta.addEffect(FireworkEffect.builder().withColor(Color.FUCHSIA).withFlicker().build());
                 meta.setPower(1);
                 fw.setFireworkMeta(meta);
                 timer -= 20;

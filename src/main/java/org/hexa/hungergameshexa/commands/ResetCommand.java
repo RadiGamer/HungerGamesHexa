@@ -26,7 +26,7 @@ public class ResetCommand implements CommandExecutor {
             return true;
         }
 
-            chestManager.resetChests();
+            chestManager.resetChests(true);
             commandSender.sendMessage(ChatUtil.format(chestReset));
         return true;
     }

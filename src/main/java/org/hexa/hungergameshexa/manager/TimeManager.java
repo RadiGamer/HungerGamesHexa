@@ -58,7 +58,7 @@ public class TimeManager {
                     player.playSound(player.getLocation(), Sound.BLOCK_NOTE_BLOCK_PLING, 1, 0);
                 }
             }
-            //TODO AJUSTAR TIEMPOS ENTRE CIRCULOS Y DE CERRADO
+            //TODO AJUSTAR TIEMPOS ENTRE CIRCULOS Y DE DROP
 
             if (minutos == 5 && segundos == 0) {
                 gameManager.setGameState(GameState.BORDE1);

@@ -2,10 +2,12 @@ package org.hexa.hungergameshexa.manager;
 
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
+import org.bukkit.Sound;
 import org.bukkit.block.Chest;
 import org.bukkit.block.DoubleChest;
 import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.configuration.file.FileConfiguration;
+import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.inventory.InventoryOpenEvent;
@@ -13,6 +15,7 @@ import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.InventoryHolder;
 import org.bukkit.inventory.ItemStack;
 import org.hexa.hungergameshexa.tasks.LootItem;
+import org.hexa.hungergameshexa.util.ChatUtil;
 
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -76,7 +79,13 @@ public class ChestManager implements Listener {
     public boolean hasBeenOpened(Location location){
         return openedChests.contains(location);
     }
-    public void resetChests(){
+    public void resetChests(boolean announce){
+        if(announce) {
+            Bukkit.broadcastMessage(ChatUtil.format("&eLos cofres han sido rellenados!"));
+            for (Player player : Bukkit.getOnlinePlayers()) {
+                player.playSound(player.getLocation(), Sound.BLOCK_NOTE_BLOCK_BIT, 1, 0);
+            }
+        }
         openedChests.clear();
     }
 

@@ -20,12 +20,14 @@ public class GameManager {
     private Border border;
     private EndGameTask endGameTask;
     private PlayerManager playerManager;
+    private ChestManager chestManager;
 
-    public GameManager(HungerGamesHexa plugin) {
+    public GameManager(HungerGamesHexa plugin, ChestManager chestManager) {
         this.plugin = plugin;
         this.timeManager = new TimeManager(plugin, this);
         this.endGameTask = new EndGameTask(plugin, this);
         this.playerManager = new PlayerManager(plugin,this);
+        this.chestManager = chestManager;
 
     }
 
@@ -52,15 +54,18 @@ public class GameManager {
                 break;
 
             case BORDE1:
+                Bukkit.broadcastMessage(ChatUtil.format("&cEl borde se esta cerrando &r| &6300 x 300"));
                 Border.setBorder(300,70);
                 break;
 
             case BORDE2:
+                Bukkit.broadcastMessage(ChatUtil.format("&cEl borde se esta cerrando &r| &6150 x 150"));
                 DropUtil.dropBarrelRandomly(plugin);
                 Border.setBorder(150,70);
                 break;
 
             case BORDE3:
+                Bukkit.broadcastMessage(ChatUtil.format("&cEl borde se esta cerrando &r| &650 x 50"));
                 Border.setBorder(50,70);
                 break;
 
@@ -72,11 +77,13 @@ public class GameManager {
 
             case REINICIANDO:
                 Border.setBorder(550,0);
-                Bukkit.broadcastMessage(ChatUtil.format("&oAqui va un kickall pare reiniciar todo con el texto pero no lo pongo por el desarrollo"));
-                // for (Player player : Bukkit.getOnlinePlayers()){
-                //    player.kickPlayer(ChatColor.GOLD + "El juego se esta reiniciando");
-                //}
-
+                // Bukkit.broadcastMessage(ChatUtil.format("&oYo habia ponido un kickall aqui.jpg"));
+                chestManager.resetChests(false);
+                playerManager.setStarted(false);
+                 for (Player player : Bukkit.getOnlinePlayers()){
+                    player.kickPlayer(ChatColor.GOLD + "El juego se esta reiniciando");
+                }
+                this.setGameState(GameState.ESPERANDO);
                 break;
 
         }//TODO DEFINIR VALORES BIEN

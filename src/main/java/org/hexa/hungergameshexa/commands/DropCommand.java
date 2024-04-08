@@ -33,7 +33,6 @@ public class DropCommand implements CommandExecutor {
                 return true;
             }
 
-            Player player = (Player) commandSender;
             DropUtil.dropBarrelRandomly(plugin);
             commandSender.sendMessage("Un Drop ha sido soltado en alguna parte del mundo!");
             return true;
