@@ -35,6 +35,9 @@ public class PlayerJoinListener implements Listener {
     }
     @EventHandler
     public void onPlayerJoin(PlayerJoinEvent event) {
+
+        String serverFull = plugin.getConfig().getString("messages.server-full");
+
         Player player = event.getPlayer();
         player.setGameMode(GameMode.ADVENTURE);
         if (player.hasPermission("hexa.admin")) {
@@ -43,7 +46,7 @@ public class PlayerJoinListener implements Listener {
 
         int spawnNumber = assignSpawnpoint();
         if (spawnNumber == -1) {
-            event.getPlayer().kickPlayer(ChatUtil.format("&cEl servidor esta lleno"));
+            event.getPlayer().kickPlayer(ChatUtil.format(serverFull));
             return;
         }
         playerSpawnMap.put(player.getUniqueId(), spawnNumber);

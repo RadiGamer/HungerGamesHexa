@@ -27,3 +27,9 @@ commands:
   esperando:
     usage: /<command>
     description: Cambia el gamestate a ESPERANDO
+  setdropzone:
+    usage: /<command> <zoneName> corner1|corner2
+    description: Coloca esquinas para los drops
+  droplocation:
+    usage: /<command>
+    description: Tira un drop en tu ubicacion

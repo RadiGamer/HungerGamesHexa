@@ -14,6 +14,7 @@ import org.bukkit.event.inventory.InventoryOpenEvent;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.InventoryHolder;
 import org.bukkit.inventory.ItemStack;
+import org.hexa.hungergameshexa.HungerGamesHexa;
 import org.hexa.hungergameshexa.tasks.LootItem;
 import org.hexa.hungergameshexa.util.ChatUtil;
 
@@ -26,8 +27,10 @@ import java.util.concurrent.ThreadLocalRandom;
 public class ChestManager implements Listener {
     public final Set<Location> openedChests = new HashSet<>();
     public final List<LootItem> lootItems = new ArrayList<>();
+    private final HungerGamesHexa plugin;
 
-    public ChestManager(FileConfiguration lootConfig){
+    public ChestManager(FileConfiguration lootConfig, HungerGamesHexa plugin){
+        this.plugin = plugin;
         ConfigurationSection itemSection = lootConfig.getConfigurationSection("lootItems");
 
         if(itemSection==null){
@@ -80,8 +83,12 @@ public class ChestManager implements Listener {
         return openedChests.contains(location);
     }
     public void resetChests(boolean announce){
+
+        String chestRefill = plugin.getConfig().getString("messages.chest-refill");
+
+
         if(announce) {
-            Bukkit.broadcastMessage(ChatUtil.format("&eLos cofres han sido rellenados!"));
+            Bukkit.broadcastMessage(ChatUtil.format(chestRefill));
             for (Player player : Bukkit.getOnlinePlayers()) {
                 player.playSound(player.getLocation(), Sound.BLOCK_NOTE_BLOCK_BIT, 1, 0);
             }

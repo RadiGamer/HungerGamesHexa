@@ -5,20 +5,19 @@ import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.hexa.hungergameshexa.HungerGamesHexa;
-import org.hexa.hungergameshexa.manager.GameManager;
 import org.hexa.hungergameshexa.util.ChatUtil;
-import org.hexa.hungergameshexa.util.GameState;
+import org.hexa.hungergameshexa.manager.DropManager;
 import org.jetbrains.annotations.NotNull;
 
-public class GanadorCommand implements CommandExecutor {
+public class DroponLocationCommand implements CommandExecutor {
 
     private final HungerGamesHexa plugin;
-    private final GameManager gameManager;
 
-    public GanadorCommand(HungerGamesHexa plugin, GameManager gameManager) {
+    public DroponLocationCommand(HungerGamesHexa plugin) {
         this.plugin = plugin;
-        this.gameManager = gameManager;
     }
+
+
 
     @Override
     public boolean onCommand(@NotNull CommandSender commandSender, @NotNull Command command, @NotNull String s, @NotNull String[] strings) {
@@ -26,13 +25,19 @@ public class GanadorCommand implements CommandExecutor {
         String errorConsola = plugin.getConfig().getString("messages.error-console");
         String errorPermiso = plugin.getConfig().getString("messages.error-permission");
 
+            if (!(commandSender instanceof Player)) {
+                commandSender.sendMessage(ChatUtil.format(errorConsola));
+                return true;
+            }
 
-        if (!commandSender.hasPermission("hexa.admin")) {
-            commandSender.sendMessage(ChatUtil.format(errorPermiso));
+            if (!commandSender.hasPermission("hexa.admin")) {
+                commandSender.sendMessage(ChatUtil.format(errorPermiso));
+                return true;
+            }
+
+            DropManager.dropBarrel(plugin, ((Player) commandSender).getWorld(), ((Player) commandSender).getLocation().add(0,50,0));
+
             return true;
         }
-        gameManager.setGameState(GameState.GANADOR);
-
-        return false;
-    }
-}//TODO ELIMINAR COMANDO
+    //TODO COMANDO PARA TESTEO, BORRAR O MODIFICAR COMO SE DESEE
+}

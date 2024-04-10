@@ -1,9 +1,8 @@
 package org.hexa.hungergameshexa.manager;
 
-import org.bukkit.Bukkit;
-import org.bukkit.ChatColor;
-import org.bukkit.Sound;
-import org.bukkit.World;
+import net.md_5.bungee.api.ChatMessageType;
+import net.md_5.bungee.api.chat.TextComponent;
+import org.bukkit.*;
 import org.bukkit.boss.BarColor;
 import org.bukkit.boss.BarStyle;
 import org.bukkit.boss.BossBar;
@@ -18,15 +17,31 @@ public class TimeManager {
     private int gameTime;
     private final HungerGamesHexa plugin;
     private GameManager gameManager;
+    private boolean gracePeriodActive;
+
+
 
     public TimeManager(HungerGamesHexa plugin, GameManager gameManager) {
         this.plugin = plugin;
         this.gameManager = gameManager;
+        this.gracePeriodActive = false;
         bossBar = Bukkit.createBossBar(ChatColor.BOLD + "Esperando...", BarColor.YELLOW, BarStyle.SOLID);
+    }
+    public boolean isGracePeriodActive() {
+        return gracePeriodActive;
     }
 
     public void startTimer() {
+        gracePeriodActive = true;
+
+        String gracePeriodStartMessage = plugin.getConfig().getString("messages.grace-period-start", "&eEl tiempo de gracia ha comenzado. Los jugadores no pueden recibir daño por 30 segundos!");
+        Bukkit.broadcastMessage(ChatUtil.format(gracePeriodStartMessage));
+
+
         taskId = Bukkit.getScheduler().scheduleSyncRepeatingTask(plugin, () -> {
+
+            String border30Sec = plugin.getConfig().getString("messages.border-30sec");
+
 
             World world = Bukkit.getWorld("world_1");
             bossBar.setVisible(true);
@@ -38,37 +53,42 @@ public class TimeManager {
             bossBar.setColor(BarColor.PURPLE);
             bossBar.setTitle(ChatColor.BOLD + "Tiempo Transcurrido: " + timeString + " | Borde Actual " + (int) world.getWorldBorder().getSize());
 
+            if (gameTime == 30) {
+                String gracePeriodEndMessage = plugin.getConfig().getString("messages.grace-period-end", "&cEl tiempo de gracia ha terminado. Cuidado!");
+                Bukkit.broadcastMessage(ChatUtil.format(gracePeriodEndMessage));
+                gracePeriodActive=false;
+            }
 
-
-            if (minutos == 4 && segundos == 30) {
-                Bukkit.broadcastMessage(ChatUtil.format("&c&lEl borde se cerrará en 30 segundos"));
+            if (minutos == 6 && segundos == 30) {
+                Bukkit.broadcastMessage(ChatUtil.format(border30Sec));
                 for (Player player : Bukkit.getOnlinePlayers()){
                     player.playSound(player.getLocation(), Sound.BLOCK_NOTE_BLOCK_PLING, 1, 0);
                 }
             }
-            if (minutos == 7 && segundos == 30) {
-                Bukkit.broadcastMessage(ChatUtil.format("&c&lEl borde se cerrará en 30 segundos"));
+            if (minutos == 9 && segundos == 30) {
+                Bukkit.broadcastMessage(ChatUtil.format(border30Sec));
                 for (Player player : Bukkit.getOnlinePlayers()){
                     player.playSound(player.getLocation(), Sound.BLOCK_NOTE_BLOCK_PLING, 1, 0);
                 }
             }
-            if (minutos == 10 && segundos == 0) {
-                Bukkit.broadcastMessage(ChatUtil.format("&c&lEl ultimo borde se cerrará en 30 segundos"));
+            if (minutos == 14 && segundos == 30) {
+                Bukkit.broadcastMessage(ChatUtil.format(border30Sec));
                 for (Player player : Bukkit.getOnlinePlayers()){
                     player.playSound(player.getLocation(), Sound.BLOCK_NOTE_BLOCK_PLING, 1, 0);
                 }
             }
             //TODO AJUSTAR TIEMPOS ENTRE CIRCULOS Y DE DROP
 
-            if (minutos == 5 && segundos == 0) {
+            if (minutos == 7 && segundos == 0) {
                 gameManager.setGameState(GameState.BORDE1);
             }
-            if (minutos == 8 && segundos == 0) {
+            if (minutos == 10 && segundos == 0) {
                 gameManager.setGameState(GameState.BORDE2);
             }
-            if (minutos == 10 && segundos == 30) {
+            if (minutos == 15 && segundos == 0) {
                 gameManager.setGameState(GameState.BORDE3);
             }
+
 
         }, 0L, 20L);
     }
@@ -79,5 +99,9 @@ public class TimeManager {
 
     public BossBar getBossBar() {
         return bossBar;
+    }
+
+    public void resetTimer(){
+        gameTime = 0;
     }
 }

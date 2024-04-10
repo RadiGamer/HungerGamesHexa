@@ -20,14 +20,16 @@ import java.util.Objects;
 
 public class LootConfigCommand implements CommandExecutor {
     private final HungerGamesHexa plugin;
-    String errorConsola = "&c&lNo puedes usar este comando en la consola crack";
-    String errorPermiso = "&c&lNo tienes permiso para ejecutar este comando";
+
     public LootConfigCommand(HungerGamesHexa plugin) {
         this.plugin = plugin;
     }
 
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
+
+        String errorConsola = plugin.getConfig().getString("messages.error-console");
+        String errorPermiso = plugin.getConfig().getString("messages.error-permission");
 
         if (!(sender instanceof Player)) {
             sender.sendMessage(ChatUtil.format(errorConsola));

@@ -44,6 +44,7 @@ public class DropLootManager implements Listener {
     }
    @EventHandler
    public void onBarrelOpen(InventoryOpenEvent event) {
+
        InventoryHolder holder = event.getInventory().getHolder();
        if (!(holder instanceof Barrel)) {
            return;
@@ -53,6 +54,12 @@ public class DropLootManager implements Listener {
        Location location = barrel.getLocation();
        Player player = (Player) event.getPlayer();
 
+       String dropOpening = plugin.getConfig().getString("message.drop-opening", "&fUn jugador está abriendo el drop en &7X: %d, Z: %d");
+       String dropOpeningMessage = String.format(dropOpening, location.getBlockX(), location.getBlockZ());
+
+       String dropOpeningWait = plugin.getConfig().getString("messages.drop-opening-wait", "&fEl drop se esta abriendo, tienes que esperar %d segundos.");
+
+
        if (scheduledOpenings.containsKey(location)) {
            long scheduledTime = scheduledOpenings.get(location);
            long currentTime = System.currentTimeMillis();
@@ -61,7 +68,10 @@ public class DropLootManager implements Listener {
            if (currentTime < scheduledTime) {
                event.setCancelled(true);
                long timeLeft = (scheduledTime - currentTime) / 1000;
-               player.sendActionBar(ChatColor.RED + "El drop se esta abriendo, tienes que esperar " + timeLeft + " segundos.");
+
+               String dropOpeningWaitMessage = String.format(dropOpeningWait, timeLeft);
+
+               player.sendMessage(ChatUtil.format(dropOpeningWaitMessage));
                player.playSound(player.getLocation(), Sound.BLOCK_NOTE_BLOCK_BASS, 10 , 0);
            }
            return;
@@ -69,8 +79,7 @@ public class DropLootManager implements Listener {
        scheduledOpenings.put(location, System.currentTimeMillis() + 60000);
        event.setCancelled(true);
        fill(barrel.getInventory());
-       player.sendActionBar(ChatColor.YELLOW + "El drop se está preparando, espera un momento...");
-       Bukkit.broadcastMessage(ChatUtil.format( "&6Un jugador está abriendo el drop en " + "X: " + location.getBlockX() + ", " + "Z: " + location.getBlockZ()));
+       Bukkit.broadcastMessage(ChatUtil.format(dropOpeningMessage));
 
    }
 
