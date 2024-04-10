@@ -7,16 +7,17 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.hexa.hungergameshexa.HungerGamesHexa;
 import org.hexa.hungergameshexa.manager.ChestManager;
+import org.hexa.hungergameshexa.manager.GameManager;
 import org.hexa.hungergameshexa.util.ChatUtil;
 import org.jetbrains.annotations.NotNull;
 
 public class ResetCommand implements CommandExecutor {
 
-    private final ChestManager chestManager;
+    private final GameManager gameManager;
     private final HungerGamesHexa plugin;
 
-    public ResetCommand(HungerGamesHexa plugin, ChestManager chestManager) {
-        this.chestManager = chestManager;
+    public ResetCommand(HungerGamesHexa plugin, GameManager gameManager) {
+        this.gameManager = gameManager;
         this.plugin = plugin;
     }
 
@@ -30,8 +31,7 @@ public class ResetCommand implements CommandExecutor {
             commandSender.sendMessage(ChatUtil.format(errorPermiso));
             return true;
         }
-
-            chestManager.resetChests(true);
+        gameManager.resetChests();
             commandSender.sendMessage(ChatUtil.format(chestReset));
         return true;
     }

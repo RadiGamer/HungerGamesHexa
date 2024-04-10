@@ -23,8 +23,9 @@ public class GameManager {
     private ChestManager chestManager;
     private RemoveBarrels removeBarrels;
     private DropManager dropManager;
+    private ChestTier2Manager chestTier2Manager;
 
-    public GameManager(HungerGamesHexa plugin, ChestManager chestManager) {
+    public GameManager(HungerGamesHexa plugin, ChestManager chestManager, ChestTier2Manager chestTier2Manager) {
         this.plugin = plugin;
         this.timeManager = new TimeManager(plugin, this);
         this.endGameTask = new EndGameTask(plugin, this);
@@ -32,6 +33,7 @@ public class GameManager {
         this.chestManager = chestManager;
         this.removeBarrels = new RemoveBarrels(plugin);
         this.dropManager = new DropManager(plugin);
+        this.chestTier2Manager = chestTier2Manager;
 
     }
 
@@ -87,7 +89,7 @@ public class GameManager {
 
             case REINICIANDO:
                 Border.setBorder(550,0);
-                chestManager.resetChests(false);
+                resetChests();
                 playerManager.setStarted(false);
                 timeManager.resetTimer();
                 for (Player player : Bukkit.getOnlinePlayers()){
@@ -101,5 +103,10 @@ public class GameManager {
     }
     public GameState getGameState() {
         return gameState;
+    }
+
+    public void resetChests(){
+        chestTier2Manager.resetChests(false);
+        chestManager.resetChests(true);
     }
 }

@@ -39,6 +39,6 @@ public class RemoveBarrels {
                     }
                 }
             }
-        }.runTaskAsynchronously(plugin);
+        }.runTask(plugin);
     }
 }

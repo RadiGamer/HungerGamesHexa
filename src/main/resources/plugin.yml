@@ -33,3 +33,6 @@ commands:
   droplocation:
     usage: /<command>
     description: Tira un drop en tu ubicacion
+  loott2config:
+    usage: /<command>
+    description: Configura el loot Tier 2

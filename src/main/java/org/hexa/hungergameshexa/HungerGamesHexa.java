@@ -19,6 +19,7 @@ public final class HungerGamesHexa extends JavaPlugin {
     private TimeManager timeManager;
     private PlayerManager playerManager;
     private DropManager dropManager;
+    private ChestTier2Manager chestTier2Manager;
 
     @Override
     public void onEnable() {
@@ -38,7 +39,8 @@ public final class HungerGamesHexa extends JavaPlugin {
 
         //MANAGERS
         this.chestManager = new ChestManager(getConfig(), this);
-        this.gameManager = new GameManager(this, chestManager);
+        this.chestTier2Manager = new ChestTier2Manager(getConfig(), this);
+        this.gameManager = new GameManager(this, chestManager, chestTier2Manager);
         this.spawnPointManager = new SpawnPointManager(this);
         this.dropLootManager = new DropLootManager(this, getConfig());
         this.timeManager = new TimeManager(this, gameManager);
@@ -55,18 +57,21 @@ public final class HungerGamesHexa extends JavaPlugin {
         getServer().getPluginManager().registerEvents(new DropLootConfigListener(this), this);
         getServer().getPluginManager().registerEvents(playerManager, this);
         getServer().getPluginManager().registerEvents(new ChatListener(),this);
+        getServer().getPluginManager().registerEvents(chestTier2Manager, this);
+
 
         //COMANDOS
         getCommand("lootconfig").setExecutor(new LootConfigCommand(this));
         getCommand("start").setExecutor(new StartCommand(gameManager));
         getCommand("setspawn").setExecutor(new SetSpawnCommand(this, spawnPointManager));
-        getCommand("reset").setExecutor(new ResetCommand(this, chestManager));
+        getCommand("reset").setExecutor(new ResetCommand(this, gameManager));
         getCommand("droploot").setExecutor(new DropLootConfigCommand(this));
         getCommand("drop").setExecutor(new DropCommand(this));
         getCommand("ganador").setExecutor(new GanadorCommand(this, gameManager));
         getCommand("esperando").setExecutor(new EsperandoCommand(gameManager));
         getCommand("setdropzone").setExecutor(new SetDropZoneCommand(this));
-        getCommand("droplocation").setExecutor(new DroponLocationCommand(this));
+        getCommand("droplocation").setExecutor(new DropOnLocationCommand(this));
+        getCommand("loott2config").setExecutor(new LootT2ConfigCommand(this));
     }
 
     @Override

@@ -9,11 +9,11 @@ import org.hexa.hungergameshexa.util.ChatUtil;
 import org.hexa.hungergameshexa.manager.DropManager;
 import org.jetbrains.annotations.NotNull;
 
-public class DroponLocationCommand implements CommandExecutor {
+public class DropOnLocationCommand implements CommandExecutor {
 
     private final HungerGamesHexa plugin;
 
-    public DroponLocationCommand(HungerGamesHexa plugin) {
+    public DropOnLocationCommand(HungerGamesHexa plugin) {
         this.plugin = plugin;
     }
 
