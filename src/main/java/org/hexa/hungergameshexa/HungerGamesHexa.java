@@ -5,6 +5,8 @@ import org.bukkit.GameMode;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.scheduler.BukkitScheduler;
+import org.bukkit.scoreboard.Scoreboard;
+import org.bukkit.scoreboard.Team;
 import org.hexa.hungergameshexa.commands.*;
 import org.hexa.hungergameshexa.listeners.*;
 import org.hexa.hungergameshexa.manager.*;
@@ -21,8 +23,18 @@ public final class HungerGamesHexa extends JavaPlugin {
     private DropManager dropManager;
     private ChestTier2Manager chestTier2Manager;
 
+
     @Override
     public void onEnable() {
+        Scoreboard scoreboard = this.getServer().getScoreboardManager().getMainScoreboard();
+        Team team = scoreboard.getTeam("Jugadores");
+        if (team != null) {
+            // Remove all entries from the team
+            for (String entry : team.getEntries()) {
+                team.removeEntry(entry);
+                Bukkit.getConsoleSender().sendMessage("Eliminado" + entry);
+            }
+        }
 
         BukkitScheduler scheduler = getServer().getScheduler();
         scheduler.scheduleSyncRepeatingTask(this, () -> {
@@ -53,7 +65,7 @@ public final class HungerGamesHexa extends JavaPlugin {
         getServer().getPluginManager().registerEvents(new LootConfigListener(this), this);
         getServer().getPluginManager().registerEvents(chestManager, this);
         getServer().getPluginManager().registerEvents(dropLootManager, this);
-        getServer().getPluginManager().registerEvents(new PlayerJoinListener(this), this);
+        getServer().getPluginManager().registerEvents(new PlayerJoinListener(this, gameManager), this);
         getServer().getPluginManager().registerEvents(new DropLootConfigListener(this), this);
         getServer().getPluginManager().registerEvents(playerManager, this);
         getServer().getPluginManager().registerEvents(new ChatListener(),this);

@@ -12,8 +12,10 @@ import org.bukkit.scoreboard.Scoreboard;
 import org.bukkit.scoreboard.ScoreboardManager;
 import org.bukkit.scoreboard.Team;
 import org.hexa.hungergameshexa.HungerGamesHexa;
+import org.hexa.hungergameshexa.manager.GameManager;
 import org.hexa.hungergameshexa.manager.SpawnPointManager;
 import org.hexa.hungergameshexa.util.ChatUtil;
+import org.hexa.hungergameshexa.util.GameState;
 
 import java.io.File;
 import java.io.IOException;
@@ -28,20 +30,26 @@ public class PlayerJoinListener implements Listener {
     private Map<Integer, Boolean> spawnOccupied = new HashMap<>();
     private int maxSpawnpoints = 16;
     private final HungerGamesHexa plugin;
+    private GameManager gameManager;
 
 
-    public PlayerJoinListener(HungerGamesHexa plugin) {
+    public PlayerJoinListener(HungerGamesHexa plugin, GameManager gameManager) {
         this.plugin = plugin;
+        this.gameManager = gameManager;
     }
     @EventHandler
     public void onPlayerJoin(PlayerJoinEvent event) {
 
         String serverFull = plugin.getConfig().getString("messages.server-full");
+        String gameStarted = plugin.getConfig().getString("messages.game-started");
 
         Player player = event.getPlayer();
         player.setGameMode(GameMode.ADVENTURE);
         if (player.hasPermission("hexa.admin")) {
             return;
+        }
+        if(!(gameManager.getGameState()== GameState.ESPERANDO || gameManager.getGameState() == GameState.COMENZANDO)){
+            player.kickPlayer(gameStarted);
         }
 
         int spawnNumber = assignSpawnpoint();
