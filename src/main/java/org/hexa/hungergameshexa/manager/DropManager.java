@@ -27,7 +27,7 @@ public class DropManager {
         if (!zones.isEmpty()) {
             Random random = new Random();
             DropZone selectedZone = zones.get(random.nextInt(zones.size()));
-            World world = Bukkit.getServer().getWorld("world_1"); // Ensure this is your intended world
+            World world = Bukkit.getServer().getWorld("world_1");
             if (world != null) {
                 Location dropLocation = selectedZone.getRandomLocation(world);
                 dropBarrel(plugin, world, dropLocation);
@@ -37,7 +37,7 @@ public class DropManager {
         }
     }
     private static void fallbackDrop(HungerGamesHexa plugin) {
-        World defaultWorld = Bukkit.getServer().getWorld("world_1"); // Adjust "world" to your main world's name as needed
+        World defaultWorld = Bukkit.getServer().getWorld("world_1");
         if (defaultWorld != null) {
             Location randomLocation = getRandomLocation(defaultWorld);
             if (randomLocation != null) {
@@ -67,7 +67,7 @@ public class DropManager {
         Location center = world.getWorldBorder().getCenter();
         double x = center.getX() + (random.nextDouble() * worldBorderSize * 2) - worldBorderSize;
         double z = center.getZ() + (random.nextDouble() * worldBorderSize * 2) - worldBorderSize;
-        int y = world.getHighestBlockYAt((int) x, (int) z) + 50; // 50 bloques arriba del punto mas alto
+        int y = world.getHighestBlockYAt((int) x, (int) z) + 50;
 
 
         Bukkit.getConsoleSender().sendMessage("Loaded zones: " + world + " " + x + " " +  y + " " + z);

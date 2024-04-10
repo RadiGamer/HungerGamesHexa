@@ -19,7 +19,7 @@ public class DropZone {
         Random random = new Random();
         double x = x1 + (x2 - x1) * random.nextDouble();
         double z = z1 + (z2 - z1) * random.nextDouble();
-        int y = world.getHighestBlockYAt((int)x, (int)z) + 50; // This makes it spawn above the highest block.
+        int y = world.getHighestBlockYAt((int)x, (int)z) + 50;
         return new Location(world, x, y, z);
     }
 }
