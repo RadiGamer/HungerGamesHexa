@@ -48,6 +48,9 @@ public class DropLootConfigListener implements Listener {
                     int customModelData = item.getItemMeta().getCustomModelData();
                     config.set(basePath + ".customModelData", customModelData);
                 }
+                if (item.getItemMeta().hasLore()){
+                    config.set(basePath + ".lore", item.getItemMeta().getLore());
+                }
             }
             config.set(basePath + ".minAmount", 1);
             config.set(basePath + ".maxAmount", 1);

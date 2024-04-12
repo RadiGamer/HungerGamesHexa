@@ -18,7 +18,7 @@ public class TimeManager {
     private final HungerGamesHexa plugin;
     private GameManager gameManager;
     private boolean gracePeriodActive;
-
+    private DropManager dropManager;
 
 
     public TimeManager(HungerGamesHexa plugin, GameManager gameManager) {
@@ -26,6 +26,7 @@ public class TimeManager {
         this.gameManager = gameManager;
         this.gracePeriodActive = false;
         bossBar = Bukkit.createBossBar(ChatColor.BOLD + "Esperando...", BarColor.YELLOW, BarStyle.SOLID);
+        this.dropManager = new DropManager(plugin);
     }
     public boolean isGracePeriodActive() {
         return gracePeriodActive;
@@ -79,11 +80,21 @@ public class TimeManager {
             }
             //TODO AJUSTAR TIEMPOS ENTRE CIRCULOS Y DE DROP
 
+            if(minutos == 5 && segundos == 0){
+                dropManager.dropRandomlyInZone();
+            }
             if (minutos == 7 && segundos == 0) {
                 gameManager.setGameState(GameState.BORDE1);
             }
+            if(minutos == 9 && segundos == 0){
+                dropManager.dropRandomlyInZone();
+            }
             if (minutos == 10 && segundos == 0) {
                 gameManager.setGameState(GameState.BORDE2);
+            }
+            if(minutos == 13 && segundos == 0){
+                dropManager.dropRandomlyInZone();
+                dropManager.dropRandomlyInZone();
             }
             if (minutos == 15 && segundos == 0) {
                 gameManager.setGameState(GameState.BORDE3);

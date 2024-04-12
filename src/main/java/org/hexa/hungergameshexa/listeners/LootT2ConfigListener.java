@@ -21,7 +21,7 @@ public class LootT2ConfigListener implements Listener {
 
     @EventHandler
     public void onInventoryClose(InventoryCloseEvent event) {
-        if (!(event.getView().getTitle().equals(ChatColor.LIGHT_PURPLE + "Coloca los items para los cofres" + ChatColor.WHITE + "T2"))) return;
+        if (!(event.getView().getTitle().equals(ChatColor.LIGHT_PURPLE + "Coloca los items para los cofres " + ChatColor.WHITE + "T2"))) return;
 
         ItemStack[] items = event.getInventory().getContents();
         FileConfiguration config = plugin.getConfig();
@@ -47,6 +47,9 @@ public class LootT2ConfigListener implements Listener {
                 if(item.getItemMeta().hasCustomModelData()){
                     int customModelData = item.getItemMeta().getCustomModelData();
                     config.set(basePath + ".customModelData", customModelData);
+                }
+                if (item.getItemMeta().hasLore()){
+                    config.set(basePath + ".lore", item.getItemMeta().getLore());
                 }
             }
             config.set(basePath + ".minAmount", 1);

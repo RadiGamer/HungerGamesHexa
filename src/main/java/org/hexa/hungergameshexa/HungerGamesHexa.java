@@ -14,6 +14,7 @@ import org.hexa.hungergameshexa.util.ChatUtil;
 import org.hexa.hungergameshexa.manager.DropManager;
 
 public final class HungerGamesHexa extends JavaPlugin {
+    private boolean brownDyeEnabled = false;
     private GameManager gameManager;
     private SpawnPointManager spawnPointManager;
     private ChestManager chestManager;
@@ -65,7 +66,7 @@ public final class HungerGamesHexa extends JavaPlugin {
         getServer().getPluginManager().registerEvents(new LootConfigListener(this), this);
         getServer().getPluginManager().registerEvents(chestManager, this);
         getServer().getPluginManager().registerEvents(dropLootManager, this);
-        getServer().getPluginManager().registerEvents(new PlayerJoinListener(this, gameManager), this);
+        getServer().getPluginManager().registerEvents(new PlayerJoinListener(this, gameManager, playerManager), this);
         getServer().getPluginManager().registerEvents(new DropLootConfigListener(this), this);
         getServer().getPluginManager().registerEvents(playerManager, this);
         getServer().getPluginManager().registerEvents(new ChatListener(),this);
@@ -84,6 +85,8 @@ public final class HungerGamesHexa extends JavaPlugin {
         getCommand("setdropzone").setExecutor(new SetDropZoneCommand(this));
         getCommand("droplocation").setExecutor(new DropOnLocationCommand(this));
         getCommand("loott2config").setExecutor(new LootT2ConfigCommand(this));
+        getCommand("instastart").setExecutor(new InstaStartCommand(gameManager));
+        getCommand("modotorneo").setExecutor(new ModoTorneoCommand(this));
     }
 
     @Override
@@ -91,4 +94,14 @@ public final class HungerGamesHexa extends JavaPlugin {
         Bukkit.getConsoleSender().sendMessage("§4Desactivando SurvivalGames");
         // Plugin shutdown logic
     }
+
+    public boolean isModoTorneoEnabled() {
+        return brownDyeEnabled;
+    }
+
+    public void setModoTorneoEnabled(boolean brownDyeEnabled) {
+        this.brownDyeEnabled = brownDyeEnabled;
+    }
+
+    //TODO QUE LOS JUGADORES NO PUEDAN ENTRAR SI YA EMPEZO, EL QUE CAMBIE EL GAMESTATE DEPENDIENDO DE LA CAPACIDAD (Confirmar), LOBBY, SISTEMA DE TICKETS HABILITADO
 }

@@ -97,6 +97,23 @@ public class DropManager {
                     world.spawnParticle(Particle.EXPLOSION_NORMAL, fallingBlock.getLocation(), 20, 0.5, 0.5, 0.5, 0.01);
                     world.strikeLightningEffect(fallingBlock.getLocation());
 
+                    Particle.DustOptions pinkDustOptions = new Particle.DustOptions(Color.fromRGB(255, 105, 180), 3.0F);
+                    new BukkitRunnable() {
+                        int tiempo = 30 * 20;
+                        int pasado = 0;
+
+                        @Override
+                        public void run() {
+                            if (pasado >= tiempo) {
+                                this.cancel();
+                            } else {
+                                for (int i = 0; i <= 50; i += 5) {
+                                    world.spawnParticle(Particle.REDSTONE, fallingBlock.getLocation(), 30, 0.5, 30, 0.5, pinkDustOptions);
+                                }
+                                pasado += 5;
+                            }
+                        }
+                    }.runTaskTimer(plugin, 0, 5);
                     this.cancel();
                 }
             }

@@ -76,7 +76,7 @@ public class DropLootManager implements Listener {
            }
            return;
        }
-       scheduledOpenings.put(location, System.currentTimeMillis() + 60000);
+       scheduledOpenings.put(location, System.currentTimeMillis() + 20000);
        event.setCancelled(true);
        fill(barrel.getInventory());
        Bukkit.broadcastMessage(ChatUtil.format(dropOpeningMessage));

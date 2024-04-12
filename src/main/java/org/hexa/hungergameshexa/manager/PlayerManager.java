@@ -26,6 +26,8 @@ public class PlayerManager implements Listener {
     private final GameManager gameManager;
     private boolean isStarted;
     private TimeManager timeManager;
+    public boolean gameStarted;
+    private boolean countDownStarted;
 
 
 
@@ -57,18 +59,22 @@ public class PlayerManager implements Listener {
     }
 
     private void checkAndUpdateGameState() {
-        /* int playerCount = jugadores.getEntries().size();
+        int playerCount = jugadores.getEntries().size();
         GameState currentState = gameManager.getGameState();
 
-        if (playerCount >= 8 && currentState != GameState.COMENZANDO) {
+        if (playerCount >= 8 && currentState != GameState.COMENZANDO && !gameStarted && !countDownStarted) {
             gameManager.setGameState(GameState.COMENZANDO);
-        } else if (playerCount < 8 && currentState != GameState.ESPERANDO) {
+            countDownStarted = true;
+        } if (playerCount < 8 && currentState != GameState.ESPERANDO && !gameStarted && countDownStarted) {
             gameManager.setGameState(GameState.ESPERANDO);
-        } else if (playerCount == 1 && currentState != GameState.GANADOR && (currentState == GameState.ACTIVO || currentState == GameState.BORDE1 || currentState == GameState.BORDE2 || currentState == GameState.BORDE3)) {
+            countDownStarted=false;
+        }if(!(currentState==GameState.ESPERANDO || currentState==GameState.COMENZANDO || currentState ==GameState.GANADOR)){
+            gameStarted=true;
+        }if (!(currentState == GameState.ESPERANDO || currentState == GameState.COMENZANDO) && playerCount == 1) {
             gameManager.setGameState(GameState.GANADOR);
-        }*/
-    }
+        }
 
+    }
     @EventHandler
     public void onPlayerJoin(PlayerJoinEvent event){
 
@@ -76,19 +82,30 @@ public class PlayerManager implements Listener {
 
         String playerJoin = plugin.getConfig().getString("messages.player-join");
         String adminJoin = plugin.getConfig().getString("messages.admin-join");
+        String gameStartedString = plugin.getConfig().getString("messages.game-started");
 
         Player player = event.getPlayer();
         player.setGameMode(GameMode.ADVENTURE);
         player.setHealth(20);
         player.setFoodLevel(20);
-        if(!player.hasPermission("hexa.admin")) {
-            jugadores.addEntry(player.getName());
-            String playerJoinMessage = String.format(playerJoin, event.getPlayer().getName(), jugadores.getEntries().size());
-            event.setJoinMessage(ChatUtil.format(playerJoinMessage));
-        }else{
-            String adminJoinMessage = String.format(adminJoin, event.getPlayer().getName());
+
+
+        if (player.hasPermission("hexa.admin")) {
+            String adminJoinMessage = String.format(adminJoin, player.getName());
             event.setJoinMessage(ChatUtil.format(adminJoinMessage));
+        } else {
+            if (gameStarted) {
+                if (!jugadores.hasEntry(player.getName()) && !player.isOp()) {
+                    player.kickPlayer(gameStartedString); //TODO AsyncPlayerPreLoginEvent
+                }
+            } else {
+                jugadores.addEntry(player.getName());
+                String playerJoinMessage = String.format(playerJoin, player.getName(), jugadores.getEntries().size());
+                event.setJoinMessage(ChatUtil.format(playerJoinMessage));
+                player.getInventory().clear();
+            }
         }
+
 
         checkAndUpdateGameState();
     }

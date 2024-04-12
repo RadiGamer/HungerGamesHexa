@@ -141,354 +141,420 @@ messages:
   grace-period-start: '&fEl tiempo de gracia ha comenzado. Los jugadores no pueden recibir daño por &730 segundos'
   grace-period-end: '&fEl tiempo de gracia ha terminado. ¡Ya puedes recibir daño!'
   drop-message: '&dUn drop está cayendo en §fX: %d Z: %d'
+  game-started: '&dEl juego ya ha empezado. &fIntentalo mas tarde'
+  player-rejoin: '&fBienvenido de vuelta'
+lootItemst2:
+  '0':
+    material: GOLDEN_HELMET
+    name: §f§l- Armadura §f§l§nNivel 2§f - §f
+    lore:
+      - §f • Armadura ||
+    minAmount: 1
+    maxAmount: 1
+    chance: 0.1
+  '1':
+    material: GOLDEN_CHESTPLATE
+    name: §f§l- Armadura §f§l§nNivel 2§f - §f
+    lore:
+      - §f • Armadura ||
+    minAmount: 1
+    maxAmount: 1
+    chance: 0.1
+  '2':
+    material: GOLDEN_LEGGINGS
+    name: §f§l- Armadura §f§l§nNivel 2§f - §f
+    lore:
+      - §f • Armadura ||
+    minAmount: 1
+    maxAmount: 1
+    chance: 0.1
+  '3':
+    material: GOLDEN_BOOTS
+    name: §f§l- Armadura §f§l§nNivel 2§f - §f
+    lore:
+      - §f • Armadura ||
+    minAmount: 1
+    maxAmount: 1
+    chance: 0.1
+  '4':
+    material: CHAINMAIL_HELMET
+    name: §f§l- Armadura §f§l§nNivel 3§f - §f
+    lore:
+      - §f • Armadura |||
+    minAmount: 1
+    maxAmount: 1
+    chance: 0.1
+  '5':
+    material: CHAINMAIL_CHESTPLATE
+    name: §f§l- Armadura §f§l§nNivel 3§f - §f
+    lore:
+      - §f • Armadura |||
+    minAmount: 1
+    maxAmount: 1
+    chance: 0.1
+  '6':
+    material: CHAINMAIL_LEGGINGS
+    name: §f§l- Armadura §f§l§nNivel 3§f - §f
+    lore:
+      - §f • Armadura |||
+    minAmount: 1
+    maxAmount: 1
+    chance: 0.1
+  '7':
+    material: CHAINMAIL_BOOTS
+    name: §f§l- Armadura §f§l§nNivel 3§f - §f
+    lore:
+      - §f • Armadura |||
+    minAmount: 1
+    maxAmount: 1
+    chance: 0.1
+  '8':
+    material: SHIELD
+    name: §f§l- Escudo§f - §f
+    lore:
+      - §f • ¡Protegete de la jalea!
+    minAmount: 1
+    maxAmount: 1
+    chance: 0.1
+  '9':
+    material: IRON_CHESTPLATE
+    name: §f§l- Armadura §f§l§nNivel 4§f - §f
+    lore:
+      - §f • Armadura ||||
+    minAmount: 1
+    maxAmount: 1
+    chance: 0.1
+  '10':
+    material: IRON_HELMET
+    name: §f§l- Armadura §f§l§nNivel 4§f - §f
+    lore:
+      - §f • Armadura ||||
+    minAmount: 1
+    maxAmount: 1
+    chance: 0.1
+  '11':
+    material: GOLDEN_CARROT
+    name: §f§l- Zanahoria§f - §f
+    lore:
+      - §f • Recuerda alimentarte sanamente
+    minAmount: 1
+    maxAmount: 1
+    chance: 0.1
+  '12':
+    material: GOLDEN_APPLE
+    name: §f§l- Sponch PiñaCool§f - §f
+    customModelData: 2
+    lore:
+      - §f • ¡Diversión por niveles!
+    minAmount: 1
+    maxAmount: 1
+    chance: 0.1
+  '13':
+    material: GOLDEN_APPLE
+    name: §f§l- Sponch§f - §f
+    customModelData: 1
+    lore:
+      - §f • ¡Diversión por niveles!
+    minAmount: 1
+    maxAmount: 1
+    chance: 0.1
+  '14':
+    material: BROWN_DYE
+    name: §f§l- Localizador§f - §f
+    customModelData: 12
+    lore:
+      - §f • Te muestra la posición de otros jugadores
+    minAmount: 1
+    maxAmount: 1
+    chance: 0.1
+  '15':
+    material: BROWN_DYE
+    name: §f§l- Botiquin§f - §f
+    customModelData: 13
+    lore:
+      - §f • Restaura 6 puntos de vida
+      - §f • Tarda 5 segundos en activarse
+    minAmount: 1
+    maxAmount: 1
+    chance: 0.1
+  '16':
+    material: CROSSBOW
+    name: §f§l- Inigualable§f - §f
+    customModelData: 5
+    lore:
+      - §f • Munición ||||||||||||||||||||||||||||||||||||||||||||||||||
+      - §f • Daño 0.025
+    minAmount: 1
+    maxAmount: 1
+    chance: 0.1
+  '17':
+    material: CROSSBOW
+    name: §f§l- Irresistible§f - §f
+    customModelData: 4
+    lore:
+      - §f • Munición ||||||||||||||||||||||||||||||||
+      - §f • Daño 0.35
+    minAmount: 1
+    maxAmount: 1
+    chance: 0.1
+  '18':
+    material: CROSSBOW
+    name: §f§l- Sabrosa§f - §f
+    customModelData: 7
+    lore:
+      - §f • Munición |||||||||||||||||||||||||
+      - §f • Daño 0.41
+    minAmount: 1
+    maxAmount: 1
+    chance: 0.1
+drop-zones:
+  spawn1:
+    corner1:
+      - -28.431765313052733
+      - -44.505593185941265
+    corner2:
+      - 28.356711437772272
+      - -70.67621876406285
+  spawn2:
+    corner1:
+      - -27.519977996537513
+      - -16.46468566164804
+    corner2:
+      - 28.435502142897395
+      - -38.426456934046755
 lootItems:
   '0':
-    material: CROSSBOW
-    name: §f§l M401
+    material: LEATHER_HELMET
+    name: §f§l- Armadura §f§l§nNivel 1§f - §f
     customModelData: 8
+    lore:
+      - §f • Armadura |
     minAmount: 1
     maxAmount: 1
     chance: 0.1
   '1':
-    material: CROSSBOW
-    name: §f§l M249
+    material: LEATHER_CHESTPLATE
+    name: §f§l- Armadura §f§l§nNivel 1§f - §f
     customModelData: 5
+    lore:
+      - §f • Armadura |
     minAmount: 1
     maxAmount: 1
     chance: 0.1
   '2':
-    material: BROWN_DYE
-    name: §f§l Kar98k
+    material: LEATHER_LEGGINGS
+    name: §f§l- Armadura §f§l§nNivel 1§f - §f
     customModelData: 4
+    lore:
+      - §f • Armadura |
     minAmount: 1
     maxAmount: 1
     chance: 0.1
   '3':
-    material: GOLDEN_APPLE
-    name: §f§l M249
+    material: LEATHER_BOOTS
+    name: §f§l- Armadura §f§l§nNivel 1§f - §f
     customModelData: 2
+    lore:
+      - §f • Armadura |
     minAmount: 1
     maxAmount: 1
     chance: 0.1
   '4':
-    material: BROWN_DYE
-    name: §f§l M401
+    material: SHIELD
+    name: §f§l- Escudo§f - §f
     customModelData: 3
+    lore:
+      - §f • ¡Protegete de la jalea!
     minAmount: 1
     maxAmount: 1
     chance: 0.1
   '5':
-    material: BROWN_DYE
-    customModelData: 5
+    material: GOLDEN_APPLE
+    name: §f§l- Sponch PiñaCool§f - §f
+    customModelData: 2
+    lore:
+      - §f • ¡Diversión por niveles!
     minAmount: 1
     maxAmount: 1
     chance: 0.1
   '6':
     material: GOLDEN_APPLE
+    name: §f§l- Sponch§f - §f
     customModelData: 1
+    lore:
+      - §f • ¡Diversión por niveles!
     minAmount: 1
     maxAmount: 1
     chance: 0.1
   '7':
-    material: FLINT_AND_STEEL
-    customModelData: 7
+    material: BROWN_DYE
+    name: §f§l- Botiquin§f - §f
+    customModelData: 13
+    lore:
+      - §f • Restaura 6 puntos de vida
+      - §f • Tarda 5 segundos en activarse
     minAmount: 1
     maxAmount: 1
     chance: 0.1
   '8':
-    material: CROSSBOW
-    name: §f§l AK47
+    material: GOLDEN_CARROT
+    name: §f§l- Zanahoria§f - §f
     customModelData: 7
+    lore:
+      - §f • Recuerda alimentarte sanamente
     minAmount: 1
     maxAmount: 1
     chance: 0.1
   '9':
     material: CROSSBOW
-    name: §f§l SCAR
-    customModelData: 4
+    name: §f§l- Fresa§f - §f
+    customModelData: 1
+    lore:
+      - §f • Munición ||||||||||
+      - §f • Daño 1.0
     minAmount: 1
     maxAmount: 1
     chance: 0.1
   '10':
     material: CROSSBOW
-    name: §f§l Kar98k
-    customModelData: 6
+    name: §f§l- Sponch§f - §f
+    customModelData: 2
+    lore:
+      - §f • Munición ||||||||||
+      - §f • Daño 1.0
     minAmount: 1
     maxAmount: 1
     chance: 0.1
   '11':
-    material: LEATHER_HELMET
+    material: CROSSBOW
+    name: §f§l- PiñaCool§f - §f
+    customModelData: 3
+    lore:
+      - §f • Munición ||||||||||
+      - §f • Daño 1.0
     minAmount: 1
     maxAmount: 1
     chance: 0.1
-  '12':
-    material: LEATHER_CHESTPLATE
-    minAmount: 1
-    maxAmount: 1
-    chance: 0.1
-  '13':
-    material: LEATHER_LEGGINGS
-    minAmount: 1
-    maxAmount: 1
-    chance: 0.1
-  '14':
-    material: LEATHER_BOOTS
-    minAmount: 1
-    maxAmount: 1
-    chance: 0.1
-  '15':
-    material: WOODEN_AXE
-    minAmount: 1
-    maxAmount: 1
-    chance: 0.15
-  '16':
-    material: STONE_AXE
-    minAmount: 1
-    maxAmount: 1
-    chance: 0.1
-  '17':
-    material: WOODEN_SWORD
-    minAmount: 1
-    maxAmount: 1
-    chance: 0.1
-  '18':
-    material: STONE_SWORD
-    minAmount: 1
-    maxAmount: 1
-    chance: 0.05
-  '19':
-    material: BOW
-    minAmount: 1
-    maxAmount: 1
-    chance: 0.1
-  '20':
-    material: FISHING_ROD
-    minAmount: 1
-    maxAmount: 1
-    chance: 0.1
-  '21':
-    material: ARROW
-    minAmount: 5
-    maxAmount: 5
-    chance: 0.1
-  '22':
-    material: IRON_INGOT
-    minAmount: 1
-    maxAmount: 1
-    chance: 0.1
-  '23':
-    material: GOLD_INGOT
-    minAmount: 1
-    maxAmount: 1
-    chance: 0.1
-  '24':
-    material: STICK
-    minAmount: 1
-    maxAmount: 1
-    chance: 0.1
-  '25':
-    material: FEATHER
-    minAmount: 5
-    maxAmount: 5
-    chance: 0.1
-  '26':
-    material: FLINT
-    minAmount: 1
-    maxAmount: 1
-    chance: 0.1
-  '27':
-    material: SALMON
-    minAmount: 1
-    maxAmount: 1
-    chance: 0.08
-  '28':
-    material: BEEF
-    minAmount: 1
-    maxAmount: 2
-    chance: 0.08
-  '29':
-    material: PORKCHOP
-    minAmount: 1
-    maxAmount: 2
-    chance: 0.08
-  '30':
-    material: CHICKEN
-    minAmount: 1
-    maxAmount: 1
-    chance: 0.1
-  '31':
-    material: COOKED_BEEF
-    minAmount: 1
-    maxAmount: 2
-    chance: 0.08
-  '32':
-    material: COOKED_CHICKEN
-    minAmount: 1
-    maxAmount: 3
-    chance: 0.08
-  '33':
-    material: COOKED_SALMON
-    minAmount: 1
-    maxAmount: 3
-    chance: 0.08
-  '34':
-    material: COOKED_PORKCHOP
-    minAmount: 1
-    maxAmount: 2
-    chance: 0.08
-  '35':
-    material: APPLE
-    minAmount: 2
-    maxAmount: 2
-    chance: 0.08
-  '36':
-    material: CARROT
-    minAmount: 5
-    maxAmount: 5
-    chance: 0.08
-  '37':
-    material: MELON_SLICE
-    minAmount: 5
-    maxAmount: 5
-    chance: 0.08
-  '38':
-    material: BREAD
-    minAmount: 1
-    maxAmount: 3
-    chance: 0.08
-  '39':
-    material: COOKIE
-    minAmount: 5
-    maxAmount: 5
-    chance: 0.08
-  '40':
-    material: PUMPKIN_PIE
-    minAmount: 1
-    maxAmount: 1
-    chance: 0.8
 dropLoot:
   '0':
-    material: STONE_SWORD
+    material: IRON_LEGGINGS
+    name: §f§l- Armadura §f§l§nNivel 4§f - §f
+    lore:
+      - §f • Armadura ||||
     minAmount: 1
     maxAmount: 1
     chance: 0.1
   '1':
-    material: BOW
+    material: IRON_BOOTS
+    name: §f§l- Armadura §f§l§nNivel 4§f - §f
+    lore:
+      - §f • Armadura ||||
     minAmount: 1
     maxAmount: 1
-    chance: 0.12
+    chance: 0.1
   '2':
-    material: FISHING_ROD
+    material: DIAMOND_HELMET
+    name: §f§l- Armadura §f§l§nNivel 5§f - §f
+    lore:
+      - §f • Armadura |||||
     minAmount: 1
     maxAmount: 1
     chance: 0.1
   '3':
-    material: ARROW
-    minAmount: 5
-    maxAmount: 5
+    material: DIAMOND_CHESTPLATE
+    name: §f§l- Armadura §f§l§nNivel 5§f - §f
+    lore:
+      - §f • Armadura |||||
+    minAmount: 1
+    maxAmount: 1
     chance: 0.1
   '4':
-    material: IRON_INGOT
+    material: DIAMOND_LEGGINGS
+    name: §f§l- Armadura §f§l§nNivel 5§f - §f
+    lore:
+      - §f • Armadura |||||
     minAmount: 1
     maxAmount: 1
-    chance: 0.13
+    chance: 0.1
   '5':
-    material: STICK
+    material: DIAMOND_BOOTS
+    name: §f§l- Armadura §f§l§nNivel 5§f - §f
+    lore:
+      - §f • Armadura |||||
     minAmount: 1
     maxAmount: 1
-    chance: 0.05
+    chance: 0.1
   '6':
-    material: COOKED_BEEF
-    minAmount: 1
-    maxAmount: 5
-    chance: 0.05
-  '7':
-    material: APPLE
-    minAmount: 2
-    maxAmount: 2
-    chance: 0.05
-  '8':
-    material: CARROT
-    minAmount: 2
-    maxAmount: 2
-    chance: 0.05
-  '9':
-    material: GOLDEN_HELMET
+    material: BROWN_DYE
+    name: §f§l- Ticket Recompensa§f - §f
+    customModelData: 14
+    lore:
+      - §f • Canjealo con click izquierdo
     minAmount: 1
     maxAmount: 1
-    chance: 0.12
+    chance: 0.1
+  '7':
+    material: GOLDEN_APPLE
+    name: §f§l- Sponch PiñaCool§f - §f
+    customModelData: 2
+    lore:
+      - §f • ¡Diversión por niveles!
+    minAmount: 1
+    maxAmount: 1
+    chance: 0.1
+  '8':
+    material: GOLDEN_APPLE
+    name: §f§l- Sponch§f - §f
+    customModelData: 1
+    lore:
+      - §f • ¡Diversión por niveles!
+    minAmount: 1
+    maxAmount: 1
+    chance: 0.1
+  '9':
+    material: BROWN_DYE
+    name: §f§l- Localizador§f - §f
+    customModelData: 12
+    lore:
+      - §f • Te muestra la posición de otros jugadores
+    minAmount: 1
+    maxAmount: 1
+    chance: 0.1
   '10':
-    material: GOLDEN_CHESTPLATE
+    material: SHIELD
+    name: §f§l- Escudo§f - §f
+    lore:
+      - §f • ¡Protegete de la jalea!
     minAmount: 1
     maxAmount: 1
     chance: 0.1
   '11':
-    material: GOLDEN_LEGGINGS
+    material: BROWN_DYE
+    name: §f§l- Botiquin§f - §f
+    customModelData: 13
+    lore:
+      - §f • Restaura 6 puntos de vida
+      - §f • Tarda 5 segundos en activarse
     minAmount: 1
     maxAmount: 1
-    chance: 0.11
+    chance: 0.1
   '12':
-    material: GOLDEN_BOOTS
+    material: CROSSBOW
+    name: §f§l- Culposa§f - §f
+    customModelData: 6
+    lore:
+      - §f • Munición |
+      - §f • Daño 200
     minAmount: 1
     maxAmount: 1
     chance: 0.1
   '13':
-    material: CHAINMAIL_HELMET
+    material: CROSSBOW
+    name: §f§l- Crujiente§f - §f
+    customModelData: 9
+    lore:
+      - §f • Munición |||||||||||||||||||||||||
+      - §f • Daño 0.035x10
     minAmount: 1
     maxAmount: 1
-    chance: 0.09
-  '14':
-    material: CHAINMAIL_CHESTPLATE
-    minAmount: 1
-    maxAmount: 1
-    chance: 0.08
-  '15':
-    material: CHAINMAIL_LEGGINGS
-    minAmount: 1
-    maxAmount: 1
-    chance: 0.09
-  '16':
-    material: CHAINMAIL_BOOTS
-    minAmount: 1
-    maxAmount: 1
-    chance: 0.09
-  '17':
-    material: IRON_HELMET
-    minAmount: 1
-    maxAmount: 1
-    chance: 0.07
-  '18':
-    material: IRON_CHESTPLATE
-    minAmount: 1
-    maxAmount: 1
-    chance: 0.05
-  '19':
-    material: IRON_LEGGINGS
-    minAmount: 1
-    maxAmount: 1
-    chance: 0.06
-  '20':
-    material: IRON_BOOTS
-    minAmount: 1
-    maxAmount: 1
-    chance: 0.07
-  '21':
-    material: FLINT_AND_STEEL
-    minAmount: 1
-    maxAmount: 1
-    chance: 0.13
-  '22':
-    material: DIAMOND
-    minAmount: 1
-    maxAmount: 1
-    chance: 0.04
-  '23':
-    material: GOLDEN_CARROT
-    minAmount: 1
-    maxAmount: 1
-    chance: 0.07
-  '24':
-    material: ENCHANTED_GOLDEN_APPLE
-    minAmount: 1
-    maxAmount: 1
-    chance: 0.07
+    chance: 0.1

@@ -90,6 +90,7 @@ public class GameManager {
             case REINICIANDO:
                 Border.setBorder(550,0);
                 resetChests();
+                playerManager.gameStarted = false;
                 playerManager.setStarted(false);
                 timeManager.resetTimer();
                 for (Player player : Bukkit.getOnlinePlayers()){

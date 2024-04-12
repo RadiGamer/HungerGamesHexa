@@ -13,6 +13,7 @@ import org.bukkit.scoreboard.ScoreboardManager;
 import org.bukkit.scoreboard.Team;
 import org.hexa.hungergameshexa.HungerGamesHexa;
 import org.hexa.hungergameshexa.manager.GameManager;
+import org.hexa.hungergameshexa.manager.PlayerManager;
 import org.hexa.hungergameshexa.manager.SpawnPointManager;
 import org.hexa.hungergameshexa.util.ChatUtil;
 import org.hexa.hungergameshexa.util.GameState;
@@ -31,36 +32,46 @@ public class PlayerJoinListener implements Listener {
     private int maxSpawnpoints = 16;
     private final HungerGamesHexa plugin;
     private GameManager gameManager;
+    private Team jugadores;
+    private PlayerManager playerManager;
 
 
-    public PlayerJoinListener(HungerGamesHexa plugin, GameManager gameManager) {
+    public PlayerJoinListener(HungerGamesHexa plugin, GameManager gameManager, PlayerManager playerManager) {
         this.plugin = plugin;
         this.gameManager = gameManager;
+        this.playerManager = playerManager;
     }
     @EventHandler
     public void onPlayerJoin(PlayerJoinEvent event) {
 
         String serverFull = plugin.getConfig().getString("messages.server-full");
-        String gameStarted = plugin.getConfig().getString("messages.game-started");
+        String playerRejoin = plugin.getConfig().getString("messages.player-rejoin");
+
+
+        Scoreboard scoreboard = plugin.getServer().getScoreboardManager().getMainScoreboard();
+        jugadores = scoreboard.getTeam("Jugadores");
 
         Player player = event.getPlayer();
         player.setGameMode(GameMode.ADVENTURE);
         if (player.hasPermission("hexa.admin")) {
             return;
         }
-        if(!(gameManager.getGameState()== GameState.ESPERANDO || gameManager.getGameState() == GameState.COMENZANDO)){
-            player.kickPlayer(gameStarted);
-        }
 
-        int spawnNumber = assignSpawnpoint();
-        if (spawnNumber == -1) {
-            event.getPlayer().kickPlayer(ChatUtil.format(serverFull));
-            return;
+        if (playerManager.gameStarted && jugadores.hasEntry(player.getName())) {
+            player.sendMessage(playerRejoin);
+        } else {
+
+            int spawnNumber = assignSpawnpoint();
+            if (spawnNumber == -1) {
+                player.kickPlayer(ChatUtil.format(serverFull));
+                return;
+            }
+            playerSpawnMap.put(player.getUniqueId(), spawnNumber);
+            Location spawnLocation = getSpawnLocation(spawnNumber);
+            player.teleport(spawnLocation);
         }
-        playerSpawnMap.put(player.getUniqueId(), spawnNumber);
-        Location spawnLocation = getSpawnLocation(spawnNumber);
-        player.teleport(spawnLocation);
     }
+
 
     @EventHandler
     public void onPlayerQuit(PlayerQuitEvent event) {

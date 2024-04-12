@@ -16,6 +16,7 @@ import org.bukkit.inventory.meta.ItemMeta;
 import org.hexa.hungergameshexa.HungerGamesHexa;
 import org.hexa.hungergameshexa.util.ChatUtil;
 
+import java.util.List;
 import java.util.Objects;
 
 public class LootConfigCommand implements CommandExecutor {
@@ -42,7 +43,7 @@ public class LootConfigCommand implements CommandExecutor {
         }
 
         Player player = (Player) sender;
-        Inventory inv = Bukkit.createInventory(null, 9 * 6, ChatColor.BLUE + "Coloca los items para los cofres");
+        Inventory inv = Bukkit.createInventory(null, 9 * 2, ChatColor.BLUE + "Coloca los items para los cofres");
 
         plugin.reloadConfig();
 
@@ -72,6 +73,11 @@ public class LootConfigCommand implements CommandExecutor {
                             int customModelData = itemSection.getInt("customModelData");
                             meta.setCustomModelData(customModelData);
                         }
+                        if (itemSection.contains("lore")) {
+                            List<String> lore = itemSection.getStringList("lore");
+                            meta.setLore(lore);
+                        }
+
                         item.setItemMeta(meta);
                     }
 

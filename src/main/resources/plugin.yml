@@ -36,3 +36,9 @@ commands:
   loott2config:
     usage: /<command>
     description: Configura el loot Tier 2
+  instastart:
+    usage: /<command>
+    description: Comienza la partida automaticamente
+  modotorneo:
+    usage: /<command>
+    description: Activa o desactiva el modo torneo
