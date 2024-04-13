@@ -31,7 +31,7 @@ public class ModoTorneoCommand implements CommandExecutor {
         }
 
         plugin.setModoTorneoEnabled(!plugin.isModoTorneoEnabled());
-        sender.sendMessage(ChatUtil.format("&dEl modo torneo esta " + (plugin.isModoTorneoEnabled() ? "habilitado" : "deshabilitado")));
+        sender.sendMessage(ChatUtil.format("&dEl modo torneo esta &f" + (plugin.isModoTorneoEnabled() ? "habilitado" : "deshabilitado")));
         return true;
     }
 }

@@ -2,8 +2,10 @@ package org.hexa.hungergameshexa.manager;
 
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
+import org.bukkit.Location;
 import org.bukkit.entity.Player;
 import org.hexa.hungergameshexa.HungerGamesHexa;
+import org.hexa.hungergameshexa.listeners.PlayerJoinListener;
 import org.hexa.hungergameshexa.tasks.EndGameTask;
 import org.hexa.hungergameshexa.tasks.RemoveBarrels;
 import org.hexa.hungergameshexa.tasks.StartCountdown;
@@ -24,8 +26,9 @@ public class GameManager {
     private RemoveBarrels removeBarrels;
     private DropManager dropManager;
     private ChestTier2Manager chestTier2Manager;
+    private PlayerJoinListener playerJoinListener;
 
-    public GameManager(HungerGamesHexa plugin, ChestManager chestManager, ChestTier2Manager chestTier2Manager) {
+    public GameManager(HungerGamesHexa plugin, ChestManager chestManager, ChestTier2Manager chestTier2Manager, PlayerJoinListener playerJoinListener) {
         this.plugin = plugin;
         this.timeManager = new TimeManager(plugin, this);
         this.endGameTask = new EndGameTask(plugin, this);
@@ -34,7 +37,7 @@ public class GameManager {
         this.removeBarrels = new RemoveBarrels(plugin);
         this.dropManager = new DropManager(plugin);
         this.chestTier2Manager = chestTier2Manager;
-
+        this.playerJoinListener = playerJoinListener;
     }
 
     public void setGameState(GameState gameState) {
@@ -53,8 +56,11 @@ public class GameManager {
                 break;
 
             case COMENZANDO:
-                this.startCountdown = new StartCountdown(this, plugin);
-                this.startCountdown.runTaskTimer(plugin,0,20);
+                    //ADD HERE THE player.teleport(spawnLocation);
+
+                    this.startCountdown = new StartCountdown(this, plugin);
+                    this.startCountdown.runTaskTimer(plugin, 0, 20);
+
                 break;
             case ACTIVO:
                 for(Player player : Bukkit.getOnlinePlayers()) {
@@ -88,16 +94,16 @@ public class GameManager {
                 break;
 
             case REINICIANDO:
-                Border.setBorder(550,0);
+                for (Player player : Bukkit.getOnlinePlayers()){
+                    player.kickPlayer(ChatColor.LIGHT_PURPLE + "Gracias por Jugar. " + ChatColor.WHITE+ "El juego se esta reiniciando.");
+                }
                 resetChests();
                 playerManager.gameStarted = false;
                 playerManager.setStarted(false);
                 timeManager.resetTimer();
-                for (Player player : Bukkit.getOnlinePlayers()){
-                   player.kickPlayer(ChatColor.LIGHT_PURPLE + "Gracias por Jugar. " + ChatColor.WHITE+ "El juego se esta reiniciando.");
-                }
                  removeBarrels.removeBarrelsInArea("world_1", -340,322,373,-367);
                 this.setGameState(GameState.ESPERANDO);
+                Border.setBorder(550,0);
                 break;
 
         }//TODO DEFINIR VALORES BIEN

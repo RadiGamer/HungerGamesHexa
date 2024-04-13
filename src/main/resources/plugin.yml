@@ -42,3 +42,6 @@ commands:
   modotorneo:
     usage: /<command>
     description: Activa o desactiva el modo torneo
+  getteamsize:
+    usage: /<command>
+    description: Arroja el tamaño de jugadores

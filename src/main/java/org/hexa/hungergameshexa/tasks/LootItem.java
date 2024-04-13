@@ -65,7 +65,7 @@ public class LootItem {
         if (material == Material.BROWN_DYE && customModelData != null && customModelData == 14) {
             HungerGamesHexa plugin = HungerGamesHexa.getPlugin(HungerGamesHexa.class);
             if (!plugin.isModoTorneoEnabled()) {
-                return new ItemStack(Material.AIR); // Return an empty item stack if disabled
+                return new ItemStack(Material.AIR);
             }
         }
 

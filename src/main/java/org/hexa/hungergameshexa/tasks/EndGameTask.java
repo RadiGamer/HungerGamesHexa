@@ -22,10 +22,12 @@ public class EndGameTask {
 
     private final HungerGamesHexa plugin;
     private GameManager gameManager;
+    private BukkitRunnable victoryRunnable = null;
 
     public EndGameTask(HungerGamesHexa hungerGamesHexa, GameManager gameManager) {
         this.plugin = hungerGamesHexa;
         this.gameManager = gameManager;
+
     }
 
     public void winnerFirework(){
@@ -40,32 +42,39 @@ public class EndGameTask {
         World world = getServer().getWorld("world_1");
         List<Entity> entityList = world.getEntities();
 
-        new BukkitRunnable() {
-            int timer = 200;
+            if (victoryRunnable == null || victoryRunnable.isCancelled()) {
+                victoryRunnable = new BukkitRunnable() {
+                    int timer = 20*70; //60 DE Espera y 10 de Win announce
 
-            public void run() {
-                if (timer == 200) {
-                    Bukkit.broadcastMessage(ChatUtil.format(victoryMessage));
-                }
-                if(timer == 0){
-                    this.cancel();
-                    gameManager.setGameState(GameState.REINICIANDO);
+                    public void run() {
 
-                    for(Entity current : entityList){
-                        if(current instanceof Item){
-                            current.remove();
+                        if (timer == 1400) {
+                            Bukkit.broadcastMessage(ChatUtil.format(victoryMessage));
                         }
-                    }
+                        if (timer == 0) {
+                            this.cancel();
+                            gameManager.setGameState(GameState.REINICIANDO);
 
-                }
-                Firework fw = player.getWorld().spawn(location, Firework.class);
-                FireworkMeta meta = fw.getFireworkMeta();
-                meta.addEffect(FireworkEffect.builder().withColor(Color.FUCHSIA).withFlicker().build());
-                meta.setPower(1);
-                fw.setFireworkMeta(meta);
-                timer -= 20;
+                            for (Entity current : entityList) {
+                                if (current instanceof Item) {
+                                    current.remove();
+                                }
+                            }
+                        }
+                        if(timer>1200) {
+                            Firework fw = player.getWorld().spawn(location, Firework.class);
+                            FireworkMeta meta = fw.getFireworkMeta();
+                            meta.addEffect(FireworkEffect.builder().withColor(Color.FUCHSIA).withFlicker().build());
+                            meta.setPower(1);
+                            fw.setFireworkMeta(meta);
+                        }
+                        timer -= 20;
+                    }
+                };
+                victoryRunnable.runTaskTimer(plugin, 0, 20);
+            } else {
+                Bukkit.getLogger().info("Ya se esta ejecutando el EndGameTask!");
             }
-        }.runTaskTimer(plugin, 0, 20);
     }
 }
 

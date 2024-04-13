@@ -35,7 +35,7 @@ public class PreGameListener implements Listener {
         String cancelMove = plugin.getConfig().getString("messages.cancel-move");
 
 
-        if ((gameManager.getGameState() == GameState.ESPERANDO || gameManager.getGameState() == GameState.COMENZANDO) && !player.hasPermission("hexa.admin")) {
+        if (gameManager.getGameState() == GameState.COMENZANDO && !player.hasPermission("hexa.admin")) {
             if (hasMoved(event.getFrom(), event.getTo())) {
                 event.setTo(event.getFrom());
 
@@ -51,8 +51,6 @@ public class PreGameListener implements Listener {
     }
 
     private boolean hasMoved(org.bukkit.Location from, org.bukkit.Location to) {
-        // Check if the player has changed their X, Y, or Z coordinates significantly (ignoring slight movements like head rotation)
-        // Note: This checks if the player has moved from one block to another, not just any slight movement
         return from.getBlockX() != to.getBlockX() || from.getBlockY() != to.getBlockY() || from.getBlockZ() != to.getBlockZ();
     }
 

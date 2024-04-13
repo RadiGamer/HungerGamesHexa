@@ -19,7 +19,6 @@ public class SetDropZoneCommand implements CommandExecutor, TabCompleter {
 
     public SetDropZoneCommand(HungerGamesHexa plugin) {
         this.plugin = plugin;
-        // Ensure the command is registered and set this class as its executor and tab completer
         plugin.getCommand("setdropzone").setExecutor(this);
         plugin.getCommand("setdropzone").setTabCompleter(this);
 
