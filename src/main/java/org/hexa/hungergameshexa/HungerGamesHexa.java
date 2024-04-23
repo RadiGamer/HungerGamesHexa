@@ -89,6 +89,7 @@ public final class HungerGamesHexa extends JavaPlugin {
         getCommand("instastart").setExecutor(new InstaStartCommand(gameManager));
         getCommand("modotorneo").setExecutor(new ModoTorneoCommand(this));
         getCommand("getteamsize").setExecutor(new GetTeamSizeCommand(this));
+        getCommand("autostart").setExecutor(new autoStart(gameManager));
     }
 
 

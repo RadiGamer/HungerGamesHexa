@@ -28,11 +28,14 @@ public class GameManager {
     private ChestTier2Manager chestTier2Manager;
     private PlayerJoinListener playerJoinListener;
 
+    private boolean autoStart = true;
+
     public GameManager(HungerGamesHexa plugin, ChestManager chestManager, ChestTier2Manager chestTier2Manager, PlayerJoinListener playerJoinListener) {
         this.plugin = plugin;
         this.timeManager = new TimeManager(plugin, this);
         this.endGameTask = new EndGameTask(plugin, this);
-        this.playerManager = new PlayerManager(plugin,this);
+
+        this.playerManager = new PlayerManager(plugin, this);
         this.chestManager = chestManager;
         this.removeBarrels = new RemoveBarrels(plugin);
         this.dropManager = new DropManager(plugin);
@@ -48,7 +51,7 @@ public class GameManager {
 
 
         this.gameState = gameState;
-        switch (gameState){
+        switch (gameState) {
 
             case ESPERANDO:
                 this.startCountdown.cancel();
@@ -56,14 +59,14 @@ public class GameManager {
                 break;
 
             case COMENZANDO:
-                    //ADD HERE THE player.teleport(spawnLocation);
+                //ADD HERE THE player.teleport(spawnLocation);
 
-                    this.startCountdown = new StartCountdown(this, plugin);
-                    this.startCountdown.runTaskTimer(plugin, 0, 20);
+                this.startCountdown = new StartCountdown(this, plugin);
+                this.startCountdown.runTaskTimer(plugin, 0, 20);
 
                 break;
             case ACTIVO:
-                for(Player player : Bukkit.getOnlinePlayers()) {
+                for (Player player : Bukkit.getOnlinePlayers()) {
                     timeManager.getBossBar().addPlayer(player);
                 }
                 timeManager.startTimer();
@@ -72,19 +75,19 @@ public class GameManager {
 
             case BORDE1:
                 Bukkit.broadcastMessage(ChatUtil.format(border300));
-                Border.setBorder(300,70);
+                Border.setBorder(300, 70);
                 break;
 
             case BORDE2:
                 chestManager.resetChests(true);
                 Bukkit.broadcastMessage(ChatUtil.format(border150));
                 dropManager.dropRandomlyInZone();
-                Border.setBorder(150,70);
+                Border.setBorder(150, 70);
                 break;
 
             case BORDE3:
                 Bukkit.broadcastMessage(ChatUtil.format(border50));
-                Border.setBorder(50,70);
+                Border.setBorder(50, 70);
                 break;
 
             case GANADOR:
@@ -94,26 +97,36 @@ public class GameManager {
                 break;
 
             case REINICIANDO:
-                for (Player player : Bukkit.getOnlinePlayers()){
-                    player.kickPlayer(ChatColor.LIGHT_PURPLE + "Gracias por Jugar. " + ChatColor.WHITE+ "El juego se esta reiniciando.");
+                for (Player player : Bukkit.getOnlinePlayers()) {
+                    player.kickPlayer(ChatColor.LIGHT_PURPLE + "Gracias por Jugar. " + ChatColor.WHITE + "El juego se esta reiniciando.");
                 }
                 resetChests();
+                playerJoinListener.clearPlayerSpawnPoints();
                 playerManager.gameStarted = false;
                 playerManager.setStarted(false);
                 timeManager.resetTimer();
-                 removeBarrels.removeBarrelsInArea("world_1", -340,322,373,-367);
+                removeBarrels.removeBarrelsInArea("world_1", -340, 322, 373, -367);
                 this.setGameState(GameState.ESPERANDO);
-                Border.setBorder(550,0);
+                Border.setBorder(550, 0);
                 break;
 
         }//TODO DEFINIR VALORES BIEN
     }
+
     public GameState getGameState() {
         return gameState;
     }
 
-    public void resetChests(){
+    public void resetChests() {
         chestTier2Manager.resetChests(false);
         chestManager.resetChests(true);
+    }
+
+    public void toggleAutoStart() {
+        autoStart = !autoStart;
+    }
+
+    public boolean isAutoStart() {
+        return autoStart;
     }
 }

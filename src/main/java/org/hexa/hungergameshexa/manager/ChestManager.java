@@ -63,6 +63,7 @@ public class ChestManager implements Listener {
         inventory.clear();
         ThreadLocalRandom random = ThreadLocalRandom.current();
         Set<LootItem> used = new HashSet<>();
+        boolean itemAdded = false;
 
         for(int slotIndex = 0; slotIndex<inventory.getSize(); slotIndex++){
             LootItem randomItem = lootItems.get(random.nextInt(lootItems.size()));
@@ -72,8 +73,25 @@ public class ChestManager implements Listener {
             if(randomItem.shouldFill(random)){
                 ItemStack itemStack = randomItem.make(random);
                 inventory.setItem(slotIndex, itemStack);
+                itemAdded = true;
             }
         }
+        if (!itemAdded) {
+            LootItem fallbackItem = selectFallbackItem();
+            if (fallbackItem != null) {
+                ItemStack itemStack = fallbackItem.make(random);
+                inventory.setItem(random.nextInt(inventory.getSize()), itemStack);
+            }
+        }
+    }
+    private LootItem selectFallbackItem() {
+
+        for (LootItem item : lootItems) {
+            if (item.shouldFill(ThreadLocalRandom.current())) {
+                return item;
+            }
+        }
+        return lootItems.isEmpty() ? null : lootItems.get(0);
     }
 
     public void markAsOpened(Location location){

@@ -2,6 +2,7 @@ name: HungerGamesHexa
 version: '${project.version}'
 main: org.hexa.hungergameshexa.HungerGamesHexa
 api-version: '1.20'
+author: ImRadiGamer
 commands:
   start:
     usage: /<command>
@@ -45,3 +46,6 @@ commands:
   getteamsize:
     usage: /<command>
     description: Arroja el tamaño de jugadores
+  autostart:
+    usage: /<command>
+    description: Desactiva el autostart para hacerlo manual

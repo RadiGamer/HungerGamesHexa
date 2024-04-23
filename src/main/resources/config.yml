@@ -132,13 +132,14 @@ messages:
   admin-join: '&7%s&7 &r&fse ha unido al juego'
   player-quit: '&7%s&f &r&fha abandonado el juego &7 %d/16'
   admin-quit: '&7%s&f &r&fha abandonado el juego'
-  player-death: '&7%s &fHa sido eliminado. &7Aun restan %d jugadores'
+  player-death: '&7%s &fHa sido eliminado por &7%s. &7Aun restan %d jugadores'
   border-30sec: '&fEl borde se cerrará en &730 segundos'
   victory: '&fEl ganador es &d&l%s&e&l!'
   start10: '&fLa partida empieza en &7%d'
   start60: '&fLa partida empieza en &71 &fminuto'
   start90: '&fLa partida empieza en &71 &fminuto y &730 &fsegundos'
-  grace-period-start: '&fEl tiempo de gracia ha comenzado. Los jugadores no pueden recibir daño por &730 segundos'
+  grace-period-start: '&fEl tiempo de gracia ha comenzado. Los jugadores no pueden
+    recibir daño por &730 segundos'
   grace-period-end: '&fEl tiempo de gracia ha terminado. ¡Ya puedes recibir daño!'
   drop-message: '&dUn drop está cayendo en §fX: %d Z: %d'
   game-started: '&dEl juego ya ha empezado. &fIntentalo mas tarde'
@@ -307,6 +308,15 @@ lootItemst2:
     minAmount: 1
     maxAmount: 1
     chance: 0.1
+  '19':
+    material: BROWN_DYE
+    name: §f§l- Ticket Recompensa§f - §f
+    customModelData: 14
+    lore:
+      - §f • Canjealo con click izquierdo
+    minAmount: 1
+    maxAmount: 1
+    chance: 0.1
 drop-zones:
   spawn1:
     corner1:
@@ -322,6 +332,13 @@ drop-zones:
     corner2:
       - 28.435502142897395
       - -38.426456934046755
+  full:
+    corner1:
+      - 197.42527443990528
+      - 187.6181492037206
+    corner2:
+      - -197.84408936105598
+      - -203.69999998807907
 lootItems:
   '0':
     material: LEATHER_HELMET
@@ -443,7 +460,7 @@ dropLoot:
       - §f • Armadura ||||
     minAmount: 1
     maxAmount: 1
-    chance: 0.1
+    chance: 0.3
   '1':
     material: IRON_BOOTS
     name: §f§l- Armadura §f§l§nNivel 4§f - §f
@@ -451,7 +468,7 @@ dropLoot:
       - §f • Armadura ||||
     minAmount: 1
     maxAmount: 1
-    chance: 0.1
+    chance: 0.3
   '2':
     material: DIAMOND_HELMET
     name: §f§l- Armadura §f§l§nNivel 5§f - §f
@@ -459,7 +476,7 @@ dropLoot:
       - §f • Armadura |||||
     minAmount: 1
     maxAmount: 1
-    chance: 0.1
+    chance: 0.3
   '3':
     material: DIAMOND_CHESTPLATE
     name: §f§l- Armadura §f§l§nNivel 5§f - §f
@@ -467,7 +484,7 @@ dropLoot:
       - §f • Armadura |||||
     minAmount: 1
     maxAmount: 1
-    chance: 0.1
+    chance: 0.3
   '4':
     material: DIAMOND_LEGGINGS
     name: §f§l- Armadura §f§l§nNivel 5§f - §f
@@ -475,7 +492,7 @@ dropLoot:
       - §f • Armadura |||||
     minAmount: 1
     maxAmount: 1
-    chance: 0.1
+    chance: 0.3
   '5':
     material: DIAMOND_BOOTS
     name: §f§l- Armadura §f§l§nNivel 5§f - §f
@@ -483,7 +500,7 @@ dropLoot:
       - §f • Armadura |||||
     minAmount: 1
     maxAmount: 1
-    chance: 0.1
+    chance: 0.3
   '6':
     material: BROWN_DYE
     name: §f§l- Ticket Recompensa§f - §f
@@ -492,7 +509,7 @@ dropLoot:
       - §f • Canjealo con click izquierdo
     minAmount: 1
     maxAmount: 1
-    chance: 0.1
+    chance: 1.0
   '7':
     material: GOLDEN_APPLE
     name: §f§l- Sponch PiñaCool§f - §f
@@ -501,7 +518,7 @@ dropLoot:
       - §f • ¡Diversión por niveles!
     minAmount: 1
     maxAmount: 1
-    chance: 0.1
+    chance: 0.3
   '8':
     material: GOLDEN_APPLE
     name: §f§l- Sponch§f - §f
@@ -510,7 +527,7 @@ dropLoot:
       - §f • ¡Diversión por niveles!
     minAmount: 1
     maxAmount: 1
-    chance: 0.1
+    chance: 0.3
   '9':
     material: BROWN_DYE
     name: §f§l- Localizador§f - §f
@@ -519,7 +536,7 @@ dropLoot:
       - §f • Te muestra la posición de otros jugadores
     minAmount: 1
     maxAmount: 1
-    chance: 0.1
+    chance: 0.3
   '10':
     material: SHIELD
     name: §f§l- Escudo§f - §f
@@ -527,7 +544,7 @@ dropLoot:
       - §f • ¡Protegete de la jalea!
     minAmount: 1
     maxAmount: 1
-    chance: 0.1
+    chance: 0.3
   '11':
     material: BROWN_DYE
     name: §f§l- Botiquin§f - §f
@@ -537,7 +554,7 @@ dropLoot:
       - §f • Tarda 5 segundos en activarse
     minAmount: 1
     maxAmount: 1
-    chance: 0.1
+    chance: 0.3
   '12':
     material: CROSSBOW
     name: §f§l- Culposa§f - §f
@@ -547,14 +564,20 @@ dropLoot:
       - §f • Daño 200
     minAmount: 1
     maxAmount: 1
-    chance: 0.1
+    chance: 0.3
   '13':
-    material: CROSSBOW
-    name: §f§l- Crujiente§f - §f
-    customModelData: 9
+    material: IRON_HELMET
+    name: §f§l- Armadura §f§l§nNivel 4§f - §f
     lore:
-      - §f • Munición |||||||||||||||||||||||||
-      - §f • Daño 0.035x10
+      - §f • Armadura ||||
     minAmount: 1
     maxAmount: 1
-    chance: 0.1
+    chance: 0.3
+  '14':
+    material: IRON_CHESTPLATE
+    name: §f§l- Armadura §f§l§nNivel 4§f - §f
+    lore:
+      - §f • Armadura ||||
+    minAmount: 1
+    maxAmount: 1
+    chance: 0.3
